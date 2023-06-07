@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Reuseable */
+.myContainer {
+  @apply w-full px-4 md:px-0 max-w-7xl mx-auto;
+}
+.myBg {
+  @apply bg-cover bg-no-repeat bg-center;
+}
+
+/* Humburger menu */
+.menuIcon {
+  height: 24px !important;
+  width: 24px !important;
+}
+.bm-burger-button {
+  position: fixed;
+  width: 36px;
+  height: 30px;
+  left: 36px;
+  top: 36px;
+}
+
+/* Banner */
+.bannerBg {
+  background-image: linear-gradient(
+      rgba(87, 28, 224, 0.445),
+      rgba(31, 35, 64, 0.725)
+    ),
+    url(./assets/home/bannerBg.jpg);
+}
+/* Footer */
+.footerBg {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.1)),
+    url(./assets/home/footer-bg.png);
+}
