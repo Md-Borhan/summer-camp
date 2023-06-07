@@ -1,0 +1,17 @@
+[
+  {
+    "title": "Basketball Camp",
+    "desc": "Join our exciting basketball camp and enhance your skills on the court. Train with top coaches and participate in competitive games.",
+    "img": "https://i.ibb.co/rmhMqkj/basket.jpg"
+  },
+  {
+    "title": "Tennis Lessons",
+    "desc": "Master the game of tennis with our expert-led lessons. Whether you're a beginner or advanced player, we have a program for you.",
+    "img": "https://i.ibb.co/S51wfFY/tennis.jpg"
+  },
+  {
+    "title": "Swimming Classes",
+    "desc": "Dive into our swimming classes and learn from certified instructors. From beginners to advanced swimmers, we cater to all skill levels.",
+    "img": "https://i.ibb.co/WVkwrJF/swmming.jpg"
+  }
+]
