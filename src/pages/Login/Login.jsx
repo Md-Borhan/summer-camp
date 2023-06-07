@@ -8,42 +8,40 @@ import { Helmet } from "react-helmet";
 import { AuthContext } from "../../providers/AuthProvider";
 import Lottie from "lottie-react";
 import login from "../../assets/others/login.json";
+import { useForm } from "react-hook-form";
 
 const Login = () => {
   const { signIn, signInWithGoogle } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
   const emailRef = useRef(null);
-  const [errorText, setErrorText] = useState("");
-  const [successText, setSuccessText] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+  const onSubmit = (data) => {
+    signIn(data.email, data.password)
+      .then(() => {
+        toast.success("Login Success");
+        reset();
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
+  console.log(errors);
+  // Handle show hide password icon
   const handleEyeIcon = () => {
     setShowPassword(!showPassword);
   };
 
   const from = location.state?.from?.pathname || "/";
 
-  const handleForm = (event) => {
-    event.preventDefault();
-    const form = event.target;
-    const email = form.email.value;
-    const password = form.password.value;
-
-    setErrorText("");
-    setSuccessText("");
-
-    signIn(email, password)
-      .then(() => {
-        setSuccessText("😃 User login success!!!");
-        form.reset();
-        toast.success("Login Success");
-        navigate(from, { replace: true });
-      })
-      .catch((error) => {
-        setErrorText(error.message);
-      });
-  };
+  // Handle google login
   const handleGoogleLogin = () => {
     signInWithGoogle()
       .then((result) => {
@@ -53,10 +51,11 @@ const Login = () => {
         navigate(from, { replace: true });
       })
       .catch((error) => {
-        setErrorText(error.message);
+        toast.error(error.message);
       });
   };
 
+  // Handle github login
   /*  const handleGithubLogin = () => {
     sigInWithGithub()
       .then((result) => {
@@ -70,6 +69,7 @@ const Login = () => {
       });
   }; */
 
+  // Handle reset password
   /*  const handleResetPass = () => {
     const email = emailRef.current.value;
     resetPassword(email)
@@ -98,13 +98,13 @@ const Login = () => {
         <title>United Champions | Login</title>
         <link rel="canonical" href="http://mysite.com/example" />
       </Helmet>
-      <div className={`px-3 py-4 h-screen w-full md:max-w-7xl mx-auto`}>
+      <div className={`px-3 py-4 w-full md:max-w-7xl mx-auto`}>
         <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 py-5`}>
           <div className={`card-body shadow rounded-md shadow-blue-100`}>
             <h2 className="text-center text-3xl text-white font-bold">
               Please Login
             </h2>
-            <form onSubmit={handleForm}>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <div className={`form-control `}>
                 <label className={`label `}>
                   <span className={`label-text `}>Email</span>
@@ -113,7 +113,9 @@ const Login = () => {
                   type="email"
                   ref={emailRef}
                   name="email"
-                  required
+                  {...register("email", {
+                    required: true,
+                  })}
                   placeholder="email"
                   className={`input shadow-blue-100 shadow input-bordered `}
                 />
@@ -126,7 +128,9 @@ const Login = () => {
                   <input
                     type={showPassword ? "text" : "password"}
                     name="password"
-                    required
+                    {...register("password", {
+                      required: true,
+                    })}
                     placeholder="password"
                     className={`input w-full shadow-blue-100 shadow input-bordered `}
                   />
@@ -148,8 +152,6 @@ const Login = () => {
                   Forgot password?
                 </a>
               </label>
-              <p className={`text-success `}>{successText}</p>
-              <p className={`text-red-600 `}>{errorText}</p>
               <div
                 className={`form-control mt-4 border p-1 rounded-full border-[#571ce0] shadow-blue-100 shadow`}
               >

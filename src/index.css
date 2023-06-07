@@ -26,8 +26,8 @@
 /* Banner */
 .bannerBg {
   background-image: linear-gradient(
-      rgba(87, 28, 224, 0.445),
-      rgba(31, 35, 64, 0.725)
+      rgba(31, 35, 64, 0.5),
+      rgba(31, 35, 64, 0.5)
     ),
     url(./assets/home/bannerBg.jpg);
 }
