@@ -46,6 +46,19 @@ const Login = () => {
     signInWithGoogle()
       .then((result) => {
         const loggedUser = result.user;
+        const users = {
+          name: loggedUser?.displayName,
+          email: loggedUser?.email,
+          photo: loggedUser?.photoURL,
+          role: "student",
+        };
+        fetch(`${import.meta.env.VITE_api_url}/users/${loggedUser?.email}`, {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(users),
+        });
         console.log(loggedUser);
         toast.success("Login Success");
         navigate(from, { replace: true });
@@ -60,6 +73,18 @@ const Login = () => {
     sigInWithGithub()
       .then((result) => {
         const loggedUser = result.user;
+         const users = {
+        name: loggedUser?.displayName,
+        email: loggedUser?.email,
+        role: "student",
+      };
+      fetch(`http://localhost:5500/users/${loggedUser?.email}`, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(users),
+      });
         console.log(loggedUser);
         toast.success("Login Success");
         navigate(from, { replace: true });

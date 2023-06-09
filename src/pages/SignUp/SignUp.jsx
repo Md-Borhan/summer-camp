@@ -4,11 +4,10 @@ import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { toast } from "react-hot-toast";
-import { FaGithub, FaGoogle } from "react-icons/fa";
+// import { FaGithub, FaGoogle } from "react-icons/fa";
 
 const SignUp = () => {
-  const { createUser, updateUserProfile, signInWithGoogle } =
-    useContext(AuthContext);
+  const { createUser, updateUserProfile } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
@@ -26,7 +25,21 @@ const SignUp = () => {
         toast.success("Sign up successfully!");
         updateUserProfile(data?.name, data?.photo)
           .then(() => {
+            const users = {
+              name: data?.name,
+              email: data?.email,
+              photo: data?.photo,
+              role: "student",
+            };
+            fetch(`${import.meta.env.VITE_api_url}/users/${data?.email}`, {
+              method: "PUT",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify(users),
+            });
             toast.success("User Profile update!");
+            navigate(from, { replace: true });
           })
           .catch((error) => {
             toast.error(error.message);
@@ -50,7 +63,7 @@ const SignUp = () => {
   };
 
   // Handle google login
-  const handleGoogleLogin = () => {
+  /*   const handleGoogleLogin = () => {
     signInWithGoogle()
       .then((result) => {
         const loggedUser = result.user;
@@ -61,7 +74,7 @@ const SignUp = () => {
       .catch((error) => {
         toast.error(error.message);
       });
-  };
+  }; */
 
   // Handle github login
   /*  const handleGithubLogin = () => {

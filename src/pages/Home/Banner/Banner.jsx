@@ -13,7 +13,6 @@ const Banner = () => {
 
   useEffect(() => {
     axiosSecure("/slider").then((data) => {
-      console.log(data.data);
       setSliderData(data.data);
     });
   }, [axiosSecure]);
