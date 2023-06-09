@@ -8,7 +8,6 @@ import { toast } from "react-hot-toast";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const auth = useAuth();
-  console.log(auth);
 
   const handleLogout = () => {
     auth

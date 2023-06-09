@@ -37,6 +37,15 @@
   width: 50px !important;
 }
 
+/* Manage user */
+.btn-disabled,
+.btn[disabled],
+.btn:disabled {
+  background-color: #1f2340;
+  --tw-bg-opacity: 0.2;
+  color: #ffffff56;
+}
+
 /* Footer */
 .footerBg {
   background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.1)),
