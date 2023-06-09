@@ -24,13 +24,19 @@
 }
 
 /* Banner */
-.bannerBg {
-  background-image: linear-gradient(
-      rgba(31, 35, 64, 0.5),
-      rgba(31, 35, 64, 0.5)
-    ),
-    url(./assets/home/bannerBg.jpg);
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  font-size: 24px !important;
+  color: white;
 }
+.swiper-button-next,
+.swiper-button-prev {
+  background: #571ce0 !important;
+  border-radius: 50% !important;
+  height: 50px !important;
+  width: 50px !important;
+}
+
 /* Footer */
 .footerBg {
   background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.1)),

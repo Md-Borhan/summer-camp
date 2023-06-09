@@ -1,8 +1,7 @@
 import axios from "axios";
-import { toast } from "react-toastify";
 
 const axiosSecure = axios.create({
-  baseURL: `http://localhost:5000`,
+  baseURL: `http://localhost:5500`,
 });
 
 // axios.get()
@@ -22,7 +21,7 @@ const useAxiosSecure = () => {
         error.response &&
         (error?.response.status === 403 || error?.response.status === 401)
       ) {
-        toast.error(error?.response?.data.error);
+        console.log(error?.response?.data.error);
       }
     }
   );
