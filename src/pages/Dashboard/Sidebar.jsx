@@ -10,9 +10,9 @@ const Sidebar = () => {
   const [isActive, setActive] = useState(false);
   const location = useLocation();
 
-  const isAdmin = false;
+  const isAdmin = true;
   const isInstructor = false;
-  const isStudent = true;
+  const isStudent = false;
 
   const handleToggle = () => {
     setActive(!isActive);

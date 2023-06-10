@@ -5,16 +5,14 @@ import {
   FaLinkedin,
   FaBehanceSquare,
 } from "react-icons/fa";
+import logo from "../../../assets/icons/logo.png";
 const Footer = () => {
   return (
     <div className="footerBg myBg text-white">
       <footer className="footer p-10 md:py-20">
         <div>
-          <Link to="/" className="btn btn-ghost normal-case text-2xl">
-            <span className="text-[#571ce0] font-bold">
-              United
-              <span className="text-white font-semibold">Champions</span>
-            </span>
+          <Link to="/">
+            <img src={logo} alt="Logo" />
           </Link>
         </div>
         <div>
