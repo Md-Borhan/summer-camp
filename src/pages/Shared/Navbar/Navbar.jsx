@@ -23,9 +23,9 @@ const Navbar = () => {
   };
   return (
     <div>
-      <div className="navbar px-4 md:px-10 flex shadow-md h-full w-full bg-[#1f234088] bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border-dotted border-2 text-white border-[#571ce09f] ">
+      <div className="navbar px-4 md:px-8 flex shadow-md h-full w-full bg-[#1f234088] bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border-dotted border-2 text-white border-[#571ce09f] ">
         <div className="navbar-start">
-          <Link to="/">
+          <Link to="/" className="">
             <img src={logo} alt="Logo" />
           </Link>
         </div>

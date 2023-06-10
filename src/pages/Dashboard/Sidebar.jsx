@@ -4,15 +4,20 @@ import { AiOutlineBars, AiOutlineClose, AiTwotoneHome } from "react-icons/ai";
 import { useAuth } from "../../hooks/useAuth";
 import { FaUsers } from "react-icons/fa";
 import { GiClassicalKnowledge } from "react-icons/gi";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
 const Sidebar = () => {
   const auth = useAuth();
+  console.log(auth?.user?.email);
   const [isActive, setActive] = useState(false);
   const location = useLocation();
 
-  const isAdmin = true;
-  const isInstructor = false;
-  const isStudent = false;
+  const axiosSecure = useAxiosSecure();
+  const { data: users = [] } = useQuery(["users"], async () => {
+    const res = await axiosSecure.get(`/users/${auth?.user?.email}`);
+    return res.data;
+  });
 
   const handleToggle = () => {
     setActive(!isActive);
@@ -70,7 +75,7 @@ const Sidebar = () => {
           </div>
         </div>
 
-        {isAdmin && (
+        {users?.role === "admin" && (
           <div>
             <hr />
             <Link
@@ -94,7 +99,7 @@ const Sidebar = () => {
           </div>
         )}
 
-        {isInstructor && (
+        {users?.role === "instructor" && (
           <div>
             <hr />
             <Link
@@ -118,7 +123,7 @@ const Sidebar = () => {
           </div>
         )}
 
-        {isStudent && (
+        {users?.role === "student" && (
           <div>
             <hr />
             <Link

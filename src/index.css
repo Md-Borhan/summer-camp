@@ -9,6 +9,9 @@
 .myBg {
   @apply bg-cover bg-no-repeat bg-center;
 }
+.active {
+  @apply bg-red-500;
+}
 
 /* Humburger menu */
 .menuIcon {
