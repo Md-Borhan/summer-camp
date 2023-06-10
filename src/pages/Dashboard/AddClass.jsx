@@ -51,6 +51,7 @@ const AddClass = () => {
                 timer: 1000,
                 icon: "success",
               });
+              reset();
             }
           });
         console.log(classDetails);

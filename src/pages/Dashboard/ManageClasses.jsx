@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import SectionTitle from "../../components/SectionTitle";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { useState } from "react";
 
 const AllClasses = () => {
   const axiosSecure = useAxiosSecure();
@@ -9,6 +10,13 @@ const AllClasses = () => {
     const res = await axiosSecure.get("/classes");
     return res.data;
   });
+  const [feedbackData, setFeedbackData] = useState("");
+  const handleModalForm = (e) => {
+    const feedback = e.target.feedback.value;
+    setFeedbackData(feedback);
+    e.target.reset();
+    refetch();
+  };
   const handleApproved = (sc) => {
     fetch(`${import.meta.env.VITE_api_url}/classes/approved/${sc._id}`, {
       method: "PATCH",
@@ -57,18 +65,18 @@ const AllClasses = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({}),
+      body: JSON.stringify({ feedback: feedbackData }),
     })
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount) {
+          refetch();
           Swal.fire({
             title: `${sc.name}s give feedback!`,
             showConfirmButton: false,
             timer: 1000,
             icon: "success",
           });
-          refetch();
         }
       });
   };
@@ -76,7 +84,7 @@ const AllClasses = () => {
     <div className="text-white">
       <SectionTitle title="Manage Classes" />
       <div className="overflow-x-auto bg-[#322a71] p-10 rounded-md">
-        <table className="table">
+        <table className="table overflow-hidden">
           {/* head */}
           <thead>
             <tr className="text-white border-[#571ce0]">
@@ -91,7 +99,7 @@ const AllClasses = () => {
               <th>Feedback</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="">
             {classes?.map((sc) => (
               <tr key={sc._id} className="border-b border-[#571ce0]">
                 <td>
@@ -111,6 +119,7 @@ const AllClasses = () => {
                 <td className="py-2 px-4">
                   <button
                     onClick={() => handleApproved(sc)}
+                    disabled={sc.status !== "pending"}
                     className="btn btn-sm bg-[#1F2340] text-xs text-white hover:bg-[#1F2340]"
                   >
                     Approved
@@ -119,12 +128,16 @@ const AllClasses = () => {
                 <td className="py-2 px-4">
                   <button
                     onClick={() => handleDeny(sc)}
+                    disabled={sc.status !== "pending"}
                     className="btn btn-sm bg-[#1F2340] text-xs text-white hover:bg-[#1F2340]"
                   >
                     Deny
                   </button>
                 </td>
-                <td className="py-2 px-4">
+                <td
+                  className="py-2 px-4"
+                  onClick={() => window.my_modal_3.showModal()}
+                >
                   <button
                     onClick={() => handleFeedback(sc)}
                     className="btn btn-sm bg-[#1F2340] text-xs text-white hover:bg-[#1F2340]"
@@ -137,6 +150,30 @@ const AllClasses = () => {
           </tbody>
         </table>
       </div>
+      <dialog id="my_modal_3" className="modal">
+        <form onSubmit={handleModalForm} method="dialog" className="modal-box">
+          <button
+            htmlFor="my-modal-3"
+            title="Press ESC key to close modal"
+            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+          >
+            ✕
+          </button>
+          <h3 className="font-bold text-lg mb-3">Send Feedback!</h3>
+          <div className="form-control">
+            <textarea
+              className="textarea textarea-bordered textarea-info h-32"
+              name="feedback"
+              placeholder="Write Your Feedback"
+            ></textarea>
+          </div>
+          <div className="form-control mt-6">
+            <button type="submit" className="btn btn-primary">
+              Send Feedback
+            </button>
+          </div>
+        </form>
+      </dialog>
     </div>
   );
 };
