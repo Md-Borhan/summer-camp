@@ -12,6 +12,7 @@ import MyClass from "../pages/Dashboard/MyClass";
 import MyEnrolledClass from "../pages/Dashboard/MyEnrolledClass";
 import MySelectedClass from "../pages/Dashboard/MySelectedClass";
 import Welcome from "../pages/Dashboard/Welcome";
+import Class from "../pages/Class/Class";
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
       {
         path: "/signUp",
         element: <SignUp />,
+      },
+      {
+        path: "/class",
+        element: <Class />,
       },
     ],
   },

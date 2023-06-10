@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import { useAuth } from "../../hooks/useAuth";
 
 const UpdateClass = ({ modalData }) => {
@@ -41,7 +42,14 @@ const UpdateClass = ({ modalData }) => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
+            if (data.modifiedCount > 0) {
+              Swal.fire({
+                title: `${modalData.className} Class is Updated!`,
+                showConfirmButton: false,
+                timer: 1500,
+                icon: "success",
+              });
+            }
             form.reset();
           });
       });
@@ -159,6 +167,9 @@ const UpdateClass = ({ modalData }) => {
               </div>
             </div>
           </div>
+        </form>
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
         </form>
       </dialog>
     </div>

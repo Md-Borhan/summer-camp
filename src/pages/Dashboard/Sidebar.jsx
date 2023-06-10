@@ -11,8 +11,8 @@ const Sidebar = () => {
   const location = useLocation();
 
   const isAdmin = false;
-  const isInstructor = true;
-  const isStudent = false;
+  const isInstructor = false;
+  const isStudent = true;
 
   const handleToggle = () => {
     setActive(!isActive);
@@ -41,7 +41,7 @@ const Sidebar = () => {
         </button>
       </div>
       <div
-        className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden bg-[#322a71] w-64 space-y-6 px-2 py-4  absolute inset-y-0 left-0 transform ${
+        className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden bg-[#322a71] w-72 space-y-6 px-2 py-4  absolute inset-y-0 left-0 transform ${
           isActive && "-translate-x-full"
         }  md:translate-x-0  transition duration-200 ease-in-out`}
       >
