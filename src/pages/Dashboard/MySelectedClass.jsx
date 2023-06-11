@@ -4,13 +4,19 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const MySelectedClass = () => {
   const axiosSecure = useAxiosSecure();
-  const { data: bookedClasses = [] } = useQuery(["BookedClasses"], async () => {
-    const res = await axiosSecure.get("/booked");
-    return res.data;
-  });
+  const { data: bookedClasses = [], refetch } = useQuery(
+    ["BookedClasses"],
+    async () => {
+      const res = await axiosSecure.get("/booked");
+      return res.data;
+    }
+  );
 
   const handleDelete = (bookedClass) => {
-    console.log(bookedClass);
+    axiosSecure.delete(`/booked/${bookedClass._id}`).then((data) => {
+      console.log(data.data);
+      refetch();
+    });
   };
   const handlePay = (bookedClass) => {
     console.log(bookedClass);

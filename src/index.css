@@ -10,7 +10,11 @@
   @apply bg-cover bg-no-repeat bg-center;
 }
 .active {
-  @apply text-white px-4 py-3  bg-[rgba(87,28,224,0.2)] rounded-lg;
+  @apply px-4 py-1  border-b-2 rounded-full;
+}
+.dark {
+  background-color: #fff;
+  color: #1f2340;
 }
 
 /* Humburger menu */

@@ -7,9 +7,15 @@ import { useAuth } from "../../../hooks/useAuth";
 import { toast } from "react-hot-toast";
 import avatar from "../../../assets/icons/user.png";
 import logo from "../../../assets/icons/logo.png";
+import { MdOutlineLightMode, MdOutlineDarkMode } from "react-icons/md";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const auth = useAuth();
+
+  const [darkMode, setDarkMode] = useState(false);
+  const handleMode = () => {
+    setDarkMode(!darkMode);
+  };
 
   const handleLogout = () => {
     auth
@@ -23,7 +29,11 @@ const Navbar = () => {
   };
   return (
     <div>
-      <div className="navbar px-4 md:px-8 flex shadow-md h-full w-full bg-[#1f234088] bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border-dotted border-2 text-white border-[#571ce09f] ">
+      <div
+        className={`navbar px-4 md:px-8 flex shadow-md h-full w-full ${
+          darkMode ? "dark" : ""
+        } bg-[#1f234088] bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border-dotted border-2 text-white border-[#571ce09f]`}
+      >
         <div className="navbar-start">
           <Link to="/">
             <img src={logo} alt="Logo" />
@@ -70,6 +80,20 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
+          <div
+            onClick={() => handleMode(setDarkMode(!darkMode))}
+            className="mr-5"
+          >
+            {darkMode ? (
+              <li className="list-none">
+                <MdOutlineDarkMode size={24} />
+              </li>
+            ) : (
+              <li className="list-none">
+                <MdOutlineLightMode size={24} />
+              </li>
+            )}
+          </div>
           <div className="mr-5">
             {auth?.user ? (
               <li className="list-none" onClick={handleLogout}>
