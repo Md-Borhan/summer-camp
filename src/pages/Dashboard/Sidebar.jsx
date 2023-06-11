@@ -6,10 +6,10 @@ import { FaUsers } from "react-icons/fa";
 import { GiClassicalKnowledge } from "react-icons/gi";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import Loader from "../../loader/Loader";
 
 const Sidebar = () => {
   const auth = useAuth();
-  console.log(auth?.user?.email);
   const [isActive, setActive] = useState(false);
   const location = useLocation();
 
@@ -30,6 +30,7 @@ const Sidebar = () => {
   return (
     <>
       <div className="bg-gray-100 text-white overflow-hidden flex justify-between md:hidden">
+        {auth?.loading && <Loader />}
         <div>
           <div className="block cursor-pointer p-4 font-bold"></div>
         </div>
@@ -53,6 +54,7 @@ const Sidebar = () => {
         <div>
           <div>
             <div className="flex flex-col  items-center mt-6 -mx-2">
+              {auth?.loading && <Loader />}
               <Link to="/dashboard">
                 <img
                   className="object-cover w-24 h-24 border-[#571ce057] shadow-blue-100 shadow border-2  mx-2 rounded-full"
@@ -74,10 +76,9 @@ const Sidebar = () => {
             </div>
           </div>
         </div>
-
         {users?.role === "admin" && (
           <div>
-            <hr />
+            <hr className="border-[#571ce0]" />
             <Link
               to="/dashboard/allUsers"
               className={`flex w-full items-center px-4 py-2 mt-5 text-white hover:bg-[#1F2340] transition-colors duration-300 transform ${isLinkActive(
@@ -101,7 +102,7 @@ const Sidebar = () => {
 
         {users?.role === "instructor" && (
           <div>
-            <hr />
+            <hr className="border-[#571ce0]" />
             <Link
               to="/dashboard/addClass"
               className={`flex w-full items-center px-4 py-2 mt-5 text-white hover:bg-[#1F2340] transition-colors duration-300 transform ${isLinkActive(
@@ -125,7 +126,7 @@ const Sidebar = () => {
 
         {users?.role === "student" && (
           <div>
-            <hr />
+            <hr className="border-[#571ce0]" />
             <Link
               to="/dashboard/mySelectedClass"
               className={`flex w-full items-center px-4 py-2 mt-5 text-white hover:bg-[#1F2340] transition-colors duration-300 transform ${isLinkActive(
@@ -148,7 +149,7 @@ const Sidebar = () => {
         )}
 
         <div>
-          <hr />
+          <hr className="border-[#571ce0]" />
           <Link
             to="/"
             className={`flex w-full items-center px-4 py-2 mt-5 text-white hover:bg-[#1F2340] transition-colors duration-300 transform ${isLinkActive(

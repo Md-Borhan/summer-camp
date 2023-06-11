@@ -30,7 +30,7 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul tabIndex={0} className="flex menu-horizontal">
+          <ul tabIndex={0} className="flex gap-6 menu-horizontal">
             <li>
               <NavLink
                 to="/"
@@ -50,19 +50,23 @@ const Navbar = () => {
             <li>
               <NavLink
                 className={({ isActive }) => (isActive ? "active" : "inactive")}
-                to="/class"
+                to="/classes"
               >
                 All Classes
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                className={({ isActive }) => (isActive ? "active" : "inactive")}
-                to="/dashboard"
-              >
-                Dashboard{" "}
-              </NavLink>
-            </li>
+            {auth?.user && (
+              <li>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "active" : "inactive"
+                  }
+                  to="/dashboard"
+                >
+                  Dashboard
+                </NavLink>
+              </li>
+            )}
           </ul>
         </div>
         <div className="navbar-end">

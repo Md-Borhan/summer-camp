@@ -3,9 +3,10 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useAuth } from "../../hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import Loader from "../../loader/Loader";
 
-const Class = () => {
-  const { user } = useAuth();
+const Classes = () => {
+  const { user, loading } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
@@ -38,6 +39,7 @@ const Class = () => {
   };
   return (
     <div className="text-white">
+      {loading && <Loader />}
       <div className="grid grid-cols-1 my-14 md:grid-cols-2 lg:grid-cols-3 gap-8 myContainer">
         {classes?.map((sc) => (
           <div
@@ -84,4 +86,4 @@ const Class = () => {
   );
 };
 
-export default Class;
+export default Classes;

@@ -4,10 +4,10 @@ import { useAuth } from "../hooks/useAuth";
 import Loader from "../loader/Loader";
 
 const Dashboard = () => {
-  const { loader } = useAuth();
+  const { loading } = useAuth();
   return (
     <div className="relative min-h-screen md:flex">
-      {loader && <Loader />}
+      {loading && <Loader />}
       <Sidebar />
       <div className="flex-1  md:ml-72">
         <div className="m-8">
