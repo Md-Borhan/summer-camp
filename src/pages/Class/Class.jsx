@@ -9,8 +9,14 @@ const Class = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
+
   const { data: classes = [] } = useQuery(["classes"], async () => {
     const res = await axiosSecure.get("/classes");
+    return res.data;
+  });
+
+  const { data: users = [] } = useQuery(["users"], async () => {
+    const res = await axiosSecure.get(`/users/${user?.email}`);
     return res.data;
   });
 
@@ -59,7 +65,11 @@ const Class = () => {
               </div>
               <div className="border mt-4 w-full p-1 rounded-full inline-block border-[#571ce0] shadow-blue-100 shadow">
                 <button
-                  disabled={sc.seats === 0}
+                  disabled={
+                    sc.seats === 0 ||
+                    users.role === "admin" ||
+                    users.role === "instructor"
+                  }
                   onClick={() => handleSelectButton(user)}
                   className="btn btn-block rounded-full border-transparent bg-[#571ce0] hover:bg-transparent px-5 text-white hover:border-[#571ce0]"
                 >

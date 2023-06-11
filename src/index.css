@@ -10,7 +10,7 @@
   @apply bg-cover bg-no-repeat bg-center;
 }
 .active {
-  @apply bg-red-500;
+  @apply text-white px-4 py-3 shadow shadow-blue-200 bg-[#571ce09d] rounded-lg;
 }
 
 /* Humburger menu */

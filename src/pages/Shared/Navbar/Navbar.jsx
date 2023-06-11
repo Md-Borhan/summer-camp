@@ -2,7 +2,7 @@ import { useState } from "react";
 import { stack as Menu } from "react-burger-menu";
 import openMenu from "../../../assets/icons/menu.png";
 import closeMenu from "../../../assets/icons/close.png";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "../../../hooks/useAuth";
 import { toast } from "react-hot-toast";
 import avatar from "../../../assets/icons/user.png";
@@ -25,23 +25,43 @@ const Navbar = () => {
     <div>
       <div className="navbar px-4 md:px-8 flex shadow-md h-full w-full bg-[#1f234088] bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border-dotted border-2 text-white border-[#571ce09f] ">
         <div className="navbar-start">
-          <Link to="/" className="">
+          <Link to="/">
             <img src={logo} alt="Logo" />
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
+          <ul tabIndex={0} className="flex menu-horizontal">
             <li>
-              <Link to="/">Home</Link>
+              <NavLink
+                to="/"
+                className={({ isActive }) => (isActive ? "active" : "inactive")}
+              >
+                Home
+              </NavLink>
             </li>
             <li>
-              <a>Instructors</a>
+              <NavLink
+                to="/instructor"
+                className={({ isActive }) => (isActive ? "active" : "inactive")}
+              >
+                Instructors
+              </NavLink>
             </li>
             <li>
-              <Link to="/class">Class</Link>
+              <NavLink
+                className={({ isActive }) => (isActive ? "active" : "inactive")}
+                to="/class"
+              >
+                All Classes
+              </NavLink>
             </li>
             <li>
-              <Link to="/dashboard">Dashboard </Link>
+              <NavLink
+                className={({ isActive }) => (isActive ? "active" : "inactive")}
+                to="/dashboard"
+              >
+                Dashboard{" "}
+              </NavLink>
             </li>
           </ul>
         </div>
