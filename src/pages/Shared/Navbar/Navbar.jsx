@@ -132,25 +132,53 @@ const Navbar = () => {
           onStateChange={() => setIsMenuOpen(!isMenuOpen)}
         >
           <div className="">
-            <div className="">
-              <a className="btn btn-ghost normal-case text-xl ">
-                ChampionsUnited
-              </a>
-            </div>
-            <div className="ml-5">
-              <ul className="space-y-2">
+            <Link to="/">
+              <img src={logo} alt="Logo" />
+            </Link>
+            <div className="navbar-center hidden lg:flex">
+              <ul tabIndex={0} className="flex gap-6 menu-horizontal">
                 <li>
-                  <a>Home</a>
+                  <NavLink
+                    to="/"
+                    className={({ isActive }) =>
+                      isActive ? "active" : "inactive"
+                    }
+                  >
+                    Home
+                  </NavLink>
                 </li>
                 <li>
-                  <a>Instructors</a>
+                  <NavLink
+                    to="/instructor"
+                    className={({ isActive }) =>
+                      isActive ? "active" : "inactive"
+                    }
+                  >
+                    Instructors
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/class">Class</Link>
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive ? "active" : "inactive"
+                    }
+                    to="/classes"
+                  >
+                    All Classes
+                  </NavLink>
                 </li>
-                <li>
-                  <a>Dashboard </a>
-                </li>
+                {auth?.user && (
+                  <li>
+                    <NavLink
+                      className={({ isActive }) =>
+                        isActive ? "active" : "inactive"
+                      }
+                      to="/dashboard"
+                    >
+                      Dashboard
+                    </NavLink>
+                  </li>
+                )}
               </ul>
             </div>
             <div className="navbar-end ml-5">

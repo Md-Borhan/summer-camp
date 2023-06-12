@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import SectionTitle from "../../components/SectionTitle";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const MySelectedClass = () => {
   const axiosSecure = useAxiosSecure();
@@ -12,9 +13,8 @@ const MySelectedClass = () => {
     }
   );
 
-  const handleDelete = (bookedClass) => {
-    axiosSecure.delete(`/booked/${bookedClass._id}`).then((data) => {
-      console.log(data.data);
+  const handleDelete = (classId) => {
+    axiosSecure.delete(`/booked/${classId}`).then((data) => {
       refetch();
     });
   };
@@ -35,8 +35,8 @@ const MySelectedClass = () => {
               <th>Instructor Name</th>
               <th>Seats</th>
               <th>Price</th>
-              <th>Delete</th>
               <th>Pay</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -57,19 +57,21 @@ const MySelectedClass = () => {
                 <td>{bookedClass.seats}</td>
                 <td className="text-right">$ {bookedClass.price}</td>
                 <td className="py-2 px-4">
-                  <button
-                    className="btn btn-sm bg-red-500 text-xs text-white hover:bg-[#1F2340]"
-                    onClick={() => handleDelete(bookedClass)}
-                  >
-                    Delete
-                  </button>
+                  <Link to={`/dashboard/payment/${bookedClass._id}`}>
+                    <button
+                      className="btn btn-sm bg-[#1F2340] text-xs text-white hover:bg-[#1F2340]"
+                      onClick={() => handlePay(bookedClass)}
+                    >
+                      Pay
+                    </button>
+                  </Link>
                 </td>
                 <td className="py-2 px-4">
                   <button
-                    className="btn btn-sm bg-[#1F2340] text-xs text-white hover:bg-[#1F2340]"
-                    onClick={() => handlePay(bookedClass)}
+                    className="btn btn-sm bg-red-500 text-xs text-white hover:bg-[#1F2340]"
+                    onClick={() => handleDelete(bookedClass._id)}
                   >
-                    Pay
+                    Delete
                   </button>
                 </td>
               </tr>

@@ -14,9 +14,13 @@ const Sidebar = () => {
   const location = useLocation();
 
   const axiosSecure = useAxiosSecure();
-  const { data: users = [] } = useQuery(["users"], async () => {
-    const res = await axiosSecure.get(`/users/${auth?.user?.email}`);
-    return res.data;
+  const { data: users = [] } = useQuery({
+    queryKey: ["users", auth?.user?.email],
+    enabled: !!auth?.user?.email,
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/users/${auth?.user?.email}`);
+      return res.data;
+    },
   });
 
   const handleToggle = () => {

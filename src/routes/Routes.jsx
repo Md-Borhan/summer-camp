@@ -14,6 +14,7 @@ import MySelectedClass from "../pages/Dashboard/MySelectedClass";
 import Welcome from "../pages/Dashboard/Welcome";
 import Classes from "../pages/Classes/Classes";
 import Instructor from "../pages/Instructor/Instructor";
+import Payment from "../pages/Dashboard/Payment/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -75,6 +76,12 @@ export const router = createBrowserRouter([
       {
         path: "mySelectedClass",
         element: <MySelectedClass />,
+      },
+      {
+        path: "payment/:id",
+        element: <Payment />,
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_api_url}/booked/${params.id}`),
       },
     ],
   },
