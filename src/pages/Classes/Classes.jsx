@@ -45,7 +45,7 @@ const Classes = () => {
         seats,
         price,
         name,
-        bookedId: _id,
+        classId: _id,
       };
       fetch(`${import.meta.env.VITE_api_url}/booked`, {
         method: "POST",

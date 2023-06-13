@@ -15,6 +15,7 @@ const AllUsers = () => {
     queryKey: ["users"],
     queryFn: async () => {
       const res = await axiosSecure.get("/users");
+      console.log(res.data);
       return res.data;
     },
   });
@@ -78,40 +79,41 @@ const AllUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {users?.map((user, index) => (
-              <tr key={user._id} className="border-b border-[#571ce0]">
-                <th>{index + 1}</th>
-                <td>
-                  <div className="flex items-center space-x-3">
-                    <div className="avatar">
-                      <div className="rounded-full  border-[#571ce057] shadow-blue-100 shadow border w-12 h-12">
-                        <img src={user.photo} alt="Avatar" />
+            {Array.isArray(users) &&
+              users?.map((user, index) => (
+                <tr key={user._id} className="border-b border-[#571ce0]">
+                  <th>{index + 1}</th>
+                  <td>
+                    <div className="flex items-center space-x-3">
+                      <div className="avatar">
+                        <div className="rounded-full  border-[#571ce057] shadow-blue-100 shadow border w-12 h-12">
+                          <img src={user.photo} alt="Avatar" />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </td>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td className="py-2 px-4">
-                  <button
-                    className="btn btn-sm bg-[#1F2340] text-xs text-white hover:bg-[#1F2340]"
-                    onClick={() => handleMakeAdmin(user)}
-                    disabled={user.role === "admin"}
-                  >
-                    Make Admin
-                  </button>
-                </td>
-                <td className="py-2 px-4">
-                  <button
-                    className="btn btn-sm bg-[#1F2340] text-xs text-white hover:bg-[#1F2340]"
-                    onClick={() => handleMakeInstructor(user)}
-                    disabled={user.role === "instructor"}
-                  >
-                    Make Instructor
-                  </button>
-                </td>
-              </tr>
-            ))}
+                  </td>
+                  <td>{user.name}</td>
+                  <td>{user.email}</td>
+                  <td className="py-2 px-4">
+                    <button
+                      className="btn btn-sm bg-[#1F2340] text-xs text-white hover:bg-[#1F2340]"
+                      onClick={() => handleMakeAdmin(user)}
+                      disabled={user.role === "admin"}
+                    >
+                      Make Admin
+                    </button>
+                  </td>
+                  <td className="py-2 px-4">
+                    <button
+                      className="btn btn-sm bg-[#1F2340] text-xs text-white hover:bg-[#1F2340]"
+                      onClick={() => handleMakeInstructor(user)}
+                      disabled={user.role === "instructor"}
+                    >
+                      Make Instructor
+                    </button>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>

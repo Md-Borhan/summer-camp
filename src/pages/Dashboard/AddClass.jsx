@@ -34,6 +34,9 @@ const AddClass = () => {
           seats: parseFloat(seats),
           price: parseFloat(price),
           status: "pending",
+          feedback: "empty",
+          enrolled: parseFloat(0),
+          availableSeats: parseFloat(seats - 1),
         };
         fetch(`${import.meta.env.VITE_api_url}/classes`, {
           method: "POST",

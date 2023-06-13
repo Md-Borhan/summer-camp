@@ -7,7 +7,6 @@ import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = ({ bookedClass, price }) => {
-  console.log(price);
   const stripe = useStripe();
   const elements = useElements();
   const { user } = useAuth();
@@ -74,13 +73,14 @@ const CheckoutForm = ({ bookedClass, price }) => {
         transactionId,
         price,
         date: new Date(),
-        classid: bookedClass?._id,
-        orderId: bookedClass?.bookedId,
+        bookedId: bookedClass?._id,
+        classId: bookedClass?.classId,
         className: bookedClass?.className,
         classImage: bookedClass?.imageUrl,
       };
       axiosSecure.post("/payments", payment).then((res) => {
-        if (res.data) {
+        if (res.data.result.insertedId) {
+          console.log(res.data);
           toast.success("Payment Successfully Complete!");
           navigate("/dashboard/mySelectedClass");
         }
