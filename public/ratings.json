@@ -9,13 +9,13 @@
     "name": "Jane Smith",
     "description": "I had a wonderful experience in the class. The coach was supportive and helpful throughout the sessions. Facilities were well-maintained. Highly recommend!",
     "rating": 3.8,
-    "image": "jane-smith.jpg"
+    "image": "https://i.ibb.co/GCKrRPX/person1.png"
   },
   {
     "name": "Alex Johnson",
     "description": "Attending the class was a great decision. Instructors were knowledgeable and created a positive learning environment. Highly recommended!",
     "rating": 4.2,
-    "image": "alex-johnson.jpg"
+    "image": "https://i.ibb.co/nrT3zpL/person6.png"
   },
   {
     "name": "Emily Brown",

@@ -10,13 +10,10 @@ const AllClasses = () => {
     const res = await axiosSecure.get("/classes");
     return res.data;
   });
+  const [data, setData] = useState();
+  console.log(data);
   const [feedbackData, setFeedbackData] = useState("");
-  const handleModalForm = (e) => {
-    const feedback = e.target.feedback.value;
-    setFeedbackData(feedback);
-    e.target.reset();
-    refetch();
-  };
+
   const handleApproved = (sc) => {
     fetch(`${import.meta.env.VITE_api_url}/classes/approved/${sc._id}`, {
       method: "PATCH",
@@ -50,6 +47,7 @@ const AllClasses = () => {
       });
   };
   const handleFeedback = (sc) => {
+    console.log(feedbackData);
     fetch(`${import.meta.env.VITE_api_url}/classes/feedback/${sc._id}`, {
       method: "PATCH",
       headers: {
@@ -59,8 +57,9 @@ const AllClasses = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.modifiedCount) {
-          refetch();
+        console.log(data);
+        if (data.modifiedCount > 0) {
+          // refetch();
           toast.success("Send Feedback");
         }
       });
@@ -119,12 +118,9 @@ const AllClasses = () => {
                     Deny
                   </button>
                 </td>
-                <td
-                  className="py-2 px-4"
-                  onClick={() => window.my_modal_3.showModal()}
-                >
+                <td className="py-2 px-4">
                   <button
-                    onClick={() => handleFeedback(sc)}
+                    onClick={() => window.my_modal_3.showModal(setData(sc))}
                     className="btn btn-sm bg-[#1F2340] text-xs text-white hover:bg-[#1F2340]"
                   >
                     Feedback
@@ -136,7 +132,7 @@ const AllClasses = () => {
         </table>
       </div>
       <dialog id="my_modal_3" className="modal">
-        <form onSubmit={handleModalForm} method="dialog" className="modal-box">
+        <form method="dialog" className="modal-box">
           <button
             htmlFor="my-modal-3"
             title="Press ESC key to close modal"
@@ -147,13 +143,18 @@ const AllClasses = () => {
           <h3 className="font-bold text-lg mb-3">Send Feedback!</h3>
           <div className="form-control">
             <textarea
+              onChange={(e) => setFeedbackData(e.target.value)}
               className="textarea textarea-bordered textarea-info h-32"
-              name="feedback"
+              // name="feedback"
               placeholder="Write Your Feedback"
             ></textarea>
           </div>
           <div className="form-control mt-6">
-            <button type="submit" className="btn btn-primary">
+            <button
+              onClick={() => handleFeedback(data)}
+              type="submit"
+              className="btn btn-primary"
+            >
               Send Feedback
             </button>
           </div>

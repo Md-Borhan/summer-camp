@@ -12,13 +12,13 @@ const MyClass = () => {
     const res = await axiosSecure.get("/classes");
     return res.data;
   });
-
+  console.log(classes);
   const [modalData, setModalData] = useState({});
 
   const handleUpdateModal = (sc) => {
     setModalData(sc);
   };
-  const instructorClass = classes.filter((sc) => sc.email === user?.email);
+  // const instructorClass = classes.filter((sc) => sc.email === user?.email);
 
   return (
     <div className="text-white">
@@ -36,7 +36,7 @@ const MyClass = () => {
             </tr>
           </thead>
           <tbody className="">
-            {instructorClass?.map((sc) => (
+            {classes?.map((sc) => (
               <tr key={sc._id} className="border-b border-[#571ce0]">
                 <td>{sc.className}</td>
                 <td>{sc.status}</td>

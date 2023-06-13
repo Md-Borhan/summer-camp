@@ -6,6 +6,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Pagination, Navigation, Autoplay } from "swiper";
 import Button from "../../../components/Button";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
   const axiosSecure = useAxiosSecure();
@@ -49,7 +50,9 @@ const Banner = () => {
               <div className="w-full md:w-3/5 xl:w-3/6 mx-auto absolute flex-col text-center space-y-4 text-white items-center justify-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                 <h2 className="text-7xl font-bold  text-center">{sd?.title}</h2>
                 <p>{sd.desc}</p>
-                <Button value="Read More" />
+                <Link to="/classes">
+                  <Button value="See Our Classes" />
+                </Link>
               </div>
             </div>
           </SwiperSlide>

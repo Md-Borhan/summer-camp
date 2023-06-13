@@ -243,7 +243,7 @@ const SignUp = () => {
                       minLength: 6,
                       maxLength: 50,
                     })}
-                    placeholder="Photo Number"
+                    placeholder="Address"
                     className="input shadow-blue-200 shadow input-bordered"
                   />
                 </div>
