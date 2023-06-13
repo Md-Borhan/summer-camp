@@ -1,0 +1,38 @@
+[
+  {
+    "name": "John Doe",
+    "description": "The class was amazing! I learned a lot and had a great time. The coach was knowledgeable and provided excellent guidance. Highly recommended!",
+    "rating": 4.5,
+    "image": "https://i.ibb.co/HrMFVpj/person2.png"
+  },
+  {
+    "name": "Jane Smith",
+    "description": "I had a wonderful experience in the class. The coach was supportive and helpful throughout the sessions. Facilities were well-maintained. Highly recommend!",
+    "rating": 3.8,
+    "image": "jane-smith.jpg"
+  },
+  {
+    "name": "Alex Johnson",
+    "description": "Attending the class was a great decision. Instructors were knowledgeable and created a positive learning environment. Highly recommended!",
+    "rating": 4.2,
+    "image": "alex-johnson.jpg"
+  },
+  {
+    "name": "Emily Brown",
+    "description": "The class exceeded my expectations. The instructor was dedicated and provided individual attention. Highly recommended!",
+    "rating": 4.9,
+    "image": "emily-brown.jpg"
+  },
+  {
+    "name": "Michael Wilson",
+    "description": "I thoroughly enjoyed the class. The instructor was skilled and provided clear instructions. Highly recommended!",
+    "rating": 4.7,
+    "image": "michael-wilson.jpg"
+  },
+  {
+    "name": "Sophia Davis",
+    "description": "The class was well-structured, and the coach was knowledgeable. Highly recommend this academy!",
+    "rating": 4.3,
+    "image": "sophia-davis.jpg"
+  }
+]

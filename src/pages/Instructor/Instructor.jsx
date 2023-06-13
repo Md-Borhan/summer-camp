@@ -1,6 +1,7 @@
 import Loader from "../../loader/Loader";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
+import { Link } from "react-router-dom";
 
 const Instructor = () => {
   const { loading } = useAuth();
@@ -13,6 +14,7 @@ const Instructor = () => {
   }, []);
 
   const instructor = users?.filter((user) => user.role === "instructor");
+  console.log(instructor);
   return (
     <div>
       {loading && <Loader />}
@@ -25,6 +27,7 @@ const Instructor = () => {
               <th>Image</th>
               <th>Name</th>
               <th>Email</th>
+              <th>All Classes</th>
             </tr>
           </thead>
           <tbody>
@@ -42,10 +45,23 @@ const Instructor = () => {
                 </td>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
+                <td>
+                  <Link to="/dashboard/myClass">
+                    {" "}
+                    <button className="btn btn-sm bg-[#1F2340] text-xs text-white ">
+                      Show All Classes
+                    </button>
+                  </Link>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
+        <div className="flex justify-end mt-2">
+          <strong className=" text-white">
+            Total Class: {instructor?.length}
+          </strong>
+        </div>
       </div>
     </div>
   );

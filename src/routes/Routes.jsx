@@ -16,6 +16,7 @@ import Classes from "../pages/Classes/Classes";
 import Instructor from "../pages/Instructor/Instructor";
 import Payment from "../pages/Dashboard/Payment/Payment";
 import PaymentHistory from "../pages/Dashboard/PaymentHistory";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -56,35 +57,67 @@ export const router = createBrowserRouter([
       },
       {
         path: "allUsers",
-        element: <AllUsers />,
+        element: (
+          <PrivateRoute>
+            <AllUsers />
+          </PrivateRoute>
+        ),
       },
       {
         path: "allClasses",
-        element: <AllClasses />,
+        element: (
+          <PrivateRoute>
+            <AllClasses />
+          </PrivateRoute>
+        ),
       },
       {
         path: "addClass",
-        element: <AddClass />,
+        element: (
+          <PrivateRoute>
+            <AddClass />
+          </PrivateRoute>
+        ),
       },
       {
         path: "myClass",
-        element: <MyClass />,
+        element: (
+          <PrivateRoute>
+            <MyClass />
+          </PrivateRoute>
+        ),
       },
       {
         path: "myEnrolledClass",
-        element: <MyEnrolledClass />,
+        element: (
+          <PrivateRoute>
+            <MyEnrolledClass />
+          </PrivateRoute>
+        ),
       },
       {
         path: "mySelectedClass",
-        element: <MySelectedClass />,
+        element: (
+          <PrivateRoute>
+            <MySelectedClass />
+          </PrivateRoute>
+        ),
       },
       {
         path: "paymentHistory",
-        element: <PaymentHistory />,
+        element: (
+          <PrivateRoute>
+            <PaymentHistory />
+          </PrivateRoute>
+        ),
       },
       {
         path: "payment/:id",
-        element: <Payment />,
+        element: (
+          <PrivateRoute>
+            <Payment />
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_api_url}/booked/${params.id}`),
       },
