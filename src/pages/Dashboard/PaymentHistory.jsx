@@ -3,7 +3,7 @@ import SectionTitle from "../../components/SectionTitle";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useAuth } from "../../hooks/useAuth";
 
-const MyEnrolledClass = () => {
+const PaymentHistory = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const { data: payment = [] } = useQuery({
@@ -25,7 +25,10 @@ const MyEnrolledClass = () => {
               <th>S/L</th>
               <th>Image</th>
               <th>Class Name</th>
-              <th>Price</th>
+              <th>Transaction Id</th>
+              <th>Enrolled Date</th>
+              <th>Payment Type</th>
+              <th>Paid</th>
             </tr>
           </thead>
           <tbody>
@@ -42,7 +45,10 @@ const MyEnrolledClass = () => {
                   </div>
                 </td>
                 <td>{sp.className}</td>
-                <td>$ {sp.price}</td>
+                <td>{sp.transactionId}</td>
+                <td>{sp.date.slice(0, 10)}</td>
+                <td>Card</td>
+                <td className="text-right">$ {sp.price}</td>
               </tr>
             ))}
           </tbody>
@@ -52,4 +58,4 @@ const MyEnrolledClass = () => {
   );
 };
 
-export default MyEnrolledClass;
+export default PaymentHistory;

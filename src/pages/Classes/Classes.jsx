@@ -37,11 +37,11 @@ const Classes = () => {
         }
       });
     } else {
-      const { className, name, imageUrl, email, seats, price, _id } = sc;
+      const { className, name, imageUrl, seats, price, _id } = sc;
       const bookedClass = {
         className,
         imageUrl,
-        email,
+        email: user?.email,
         seats,
         price,
         name,
@@ -66,11 +66,12 @@ const Classes = () => {
   if (loading) {
     return <Loader />;
   }
+  const approvedClass = classes.filter((sc) => sc.status === "approved");
 
   return (
     <div className="text-white">
       <div className="grid grid-cols-1 my-14 md:grid-cols-2 lg:grid-cols-3 gap-8 myContainer">
-        {classes?.map((sc) => (
+        {approvedClass?.map((sc) => (
           <div
             key={sc._id}
             className="card w-full text-white border-[#571ce0] shadow-blue-100 shadow bg-base-100 "

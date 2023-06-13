@@ -38,7 +38,6 @@ const SignUp = () => {
               },
               body: JSON.stringify(users),
             });
-            toast.success("User Profile update!");
             navigate(from, { replace: true });
           })
           .catch((error) => {

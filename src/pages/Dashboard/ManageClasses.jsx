@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import SectionTitle from "../../components/SectionTitle";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import Swal from "sweetalert2";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 
 const AllClasses = () => {
   const axiosSecure = useAxiosSecure();
@@ -28,12 +28,7 @@ const AllClasses = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount) {
-          Swal.fire({
-            title: `${sc.name}s class is approved!`,
-            showConfirmButton: false,
-            timer: 1000,
-            icon: "success",
-          });
+          toast.success("Class Approved!");
           refetch();
         }
       });
@@ -49,12 +44,7 @@ const AllClasses = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount) {
-          Swal.fire({
-            title: `${sc.name}s class is deny!`,
-            showConfirmButton: false,
-            timer: 1000,
-            icon: "success",
-          });
+          toast.success("Class Deny!");
           refetch();
         }
       });
@@ -71,12 +61,7 @@ const AllClasses = () => {
       .then((data) => {
         if (data.modifiedCount) {
           refetch();
-          Swal.fire({
-            title: `${sc.name}s give feedback!`,
-            showConfirmButton: false,
-            timer: 1000,
-            icon: "success",
-          });
+          toast.success("Send Feedback");
         }
       });
   };

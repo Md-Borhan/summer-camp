@@ -2,8 +2,14 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AiOutlineBars, AiOutlineClose, AiTwotoneHome } from "react-icons/ai";
 import { useAuth } from "../../hooks/useAuth";
-import { FaUsers } from "react-icons/fa";
+import { FaHistory, FaShoppingBag } from "react-icons/fa";
 import { GiClassicalKnowledge } from "react-icons/gi";
+import { RiStore3Fill } from "react-icons/ri";
+import {
+  MdAssignmentAdd,
+  MdManageAccounts,
+  MdOutlineManageHistory,
+} from "react-icons/md";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../../loader/Loader";
@@ -77,6 +83,23 @@ const Sidebar = () => {
                   {auth?.user?.email}
                 </p>
               </Link>
+              <div className="mt-3">
+                {users.role === "admin" && (
+                  <p className="text-2xl text-green-500 font-semibold ">
+                    Admin Dashboard
+                  </p>
+                )}
+                {users.role === "instructor" && (
+                  <p className="text-2xl text-green-500 font-semibold ">
+                    Instructor Dashboard
+                  </p>
+                )}
+                {users.role === "student" && (
+                  <p className="text-2xl text-green-500 font-semibold ">
+                    Student Dashboard
+                  </p>
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -89,7 +112,7 @@ const Sidebar = () => {
                 "/dashboard/allUsers"
               )}`}
             >
-              <FaUsers className="w-5 h-5" />
+              <MdManageAccounts className="w-5 h-5" />
               <span className="mx-4 font-medium">Manage Users</span>
             </Link>
             <Link
@@ -98,7 +121,7 @@ const Sidebar = () => {
                 "/dashboard/allClasses"
               )}`}
             >
-              <GiClassicalKnowledge className="w-5 h-5" />
+              <MdOutlineManageHistory className="w-5 h-5" />
               <span className="mx-4 font-medium">Manage Classes</span>
             </Link>
           </div>
@@ -113,7 +136,7 @@ const Sidebar = () => {
                 "/dashboard/addClass"
               )}`}
             >
-              <FaUsers className="w-5 h-5" />
+              <MdAssignmentAdd className="w-5 h-5" />
               <span className="mx-4 font-medium">Add a Class</span>
             </Link>
             <Link
@@ -137,7 +160,7 @@ const Sidebar = () => {
                 "/dashboard/mySelectedClass"
               )}`}
             >
-              <FaUsers className="w-5 h-5" />
+              <FaShoppingBag className="w-5 h-5" />
               <span className="mx-4 font-medium">My Selected Classes</span>
             </Link>
             <Link
@@ -146,8 +169,17 @@ const Sidebar = () => {
                 "/dashboard/myEnrolledClass"
               )}`}
             >
-              <GiClassicalKnowledge className="w-5 h-5" />
+              <RiStore3Fill className="w-5 h-5" />
               <span className="mx-4 font-medium">My Enrolled Classes</span>
+            </Link>
+            <Link
+              to="/dashboard/paymentHistory"
+              className={`flex w-full items-center px-4 py-2 mt-5 text-white hover:bg-[#1F2340] transition-colors duration-300 transform ${isLinkActive(
+                "/dashboard/paymentHistory"
+              )}`}
+            >
+              <FaHistory className="w-5 h-5" />
+              <span className="mx-4 font-medium">Payment History</span>
             </Link>
           </div>
         )}

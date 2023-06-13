@@ -2,25 +2,38 @@ import { useQuery } from "@tanstack/react-query";
 import SectionTitle from "../../components/SectionTitle";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
 
 const MySelectedClass = () => {
+  const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const { data: bookedClasses = [], refetch } = useQuery(
     ["BookedClasses"],
     async () => {
-      const res = await axiosSecure.get("/booked");
+      const res = await axiosSecure.get(`/booked`);
       return res.data;
     }
   );
+  /*  const { data: bookedClasses = [], refetch } = useQuery({
+    queryKey: ["BookedClasses", user?.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/booked/${user?.email}`);
+      return res.data;
+    },
+  }); */
 
   const handleDelete = (classId) => {
     axiosSecure.delete(`/booked/${classId}`).then((data) => {
+      console.log(data);
       refetch();
     });
   };
   const handlePay = (bookedClass) => {
     console.log(bookedClass);
   };
+  const myBookedClass = bookedClasses.filter(
+    (bookedClass) => bookedClass.email === user?.email
+  );
   return (
     <div className="text-white">
       <SectionTitle title="My Selected Class" />
@@ -40,7 +53,7 @@ const MySelectedClass = () => {
             </tr>
           </thead>
           <tbody>
-            {bookedClasses?.map((bookedClass, index) => (
+            {myBookedClass?.map((bookedClass, index) => (
               <tr key={bookedClass._id} className="border-b border-[#571ce0]">
                 <th>{index + 1}</th>
                 <td>

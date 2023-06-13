@@ -1,14 +1,27 @@
 import SectionTitle from "../../components/SectionTitle";
-import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import Loader from "../../loader/Loader";
+import { useEffect } from "react";
+import { toast } from "react-hot-toast";
 
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
-  const { data: users = [], refetch } = useQuery(["users"], async () => {
-    const res = await axiosSecure.get("/users");
-    return res.data;
+  const {
+    data: users = [],
+    refetch,
+    isLoading,
+  } = useQuery({
+    queryKey: ["users"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/users");
+      return res.data;
+    },
   });
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
 
   const handleMakeInstructor = (user) => {
     fetch(`${import.meta.env.VITE_api_url}/users/instructor/${user._id}`, {
@@ -21,12 +34,7 @@ const AllUsers = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount) {
-          Swal.fire({
-            title: `${user.name} is now an Instructor!`,
-            showConfirmButton: false,
-            timer: 1000,
-            icon: "success",
-          });
+          toast.success("is now an Instructor!");
           refetch();
         }
       });
@@ -43,16 +51,15 @@ const AllUsers = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount) {
-          Swal.fire({
-            title: `${user.name} is now an Admin!`,
-            showConfirmButton: false,
-            timer: 1000,
-            icon: "success",
-          });
+          toast.success("is now an Admin!");
           refetch();
         }
       });
   };
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <div className="text-white">

@@ -3,8 +3,10 @@ import SectionTitle from "../../components/SectionTitle";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import UpdateClass from "./UpdateClass";
 import { useState } from "react";
+import { useAuth } from "../../hooks/useAuth";
 
 const MyClass = () => {
+  const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const { data: classes = [] } = useQuery(["classes"], async () => {
     const res = await axiosSecure.get("/classes");
@@ -16,6 +18,7 @@ const MyClass = () => {
   const handleUpdateModal = (sc) => {
     setModalData(sc);
   };
+  const instructorClass = classes.filter((sc) => sc.email === user?.email);
 
   return (
     <div className="text-white">
@@ -33,7 +36,7 @@ const MyClass = () => {
             </tr>
           </thead>
           <tbody className="">
-            {classes?.map((sc) => (
+            {instructorClass?.map((sc) => (
               <tr key={sc._id} className="border-b border-[#571ce0]">
                 <td>{sc.className}</td>
                 <td>{sc.status}</td>
