@@ -22,7 +22,7 @@ const PopularInstructor = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {classes?.slice(0, 6)?.map((sc) => (
           <div
-            className="flex gap-6 rounded-md items-center p-6 bg-[#571ce011] border-[#571ce0] shadow-blue-100 shadow"
+            className="flex flex-col md:flex-row gap-6 rounded-md items-center p-6 bg-[#571ce011] border-[#571ce0] shadow-blue-100 shadow"
             key={sc._id}
           >
             <div className="bg-[#571ce036] rounded-md">
