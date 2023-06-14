@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import Loader from "../../loader/Loader";
 import { toast } from "react-hot-toast";
+import { Helmet } from "react-helmet";
 
 const Classes = () => {
   const { user, loading } = useAuth();
@@ -71,6 +72,11 @@ const Classes = () => {
 
   return (
     <div className="text-white pt-20">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>United Champions | Classes</title>
+        <link rel="canonical" href="http://mysite.com/example" />
+      </Helmet>
       <div className="grid grid-cols-1 my-14 md:grid-cols-2 lg:grid-cols-3 gap-8 myContainer">
         {approvedClass?.map((sc) => (
           <div

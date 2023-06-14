@@ -2,6 +2,7 @@ import Loader from "../../loader/Loader";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const Instructor = () => {
   const { loading } = useAuth();
@@ -19,6 +20,11 @@ const Instructor = () => {
   }
   return (
     <div className="pt-20">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>United Champions | Instructor</title>
+        <link rel="canonical" href="http://mysite.com/example" />
+      </Helmet>
       <div className="overflow-x-auto bg-[#322a71] p-10 rounded-md">
         <table className="table text-white">
           {/* head */}

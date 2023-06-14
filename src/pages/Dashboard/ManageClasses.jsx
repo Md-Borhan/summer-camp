@@ -4,6 +4,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import FeedbackModal from "./FeedbackModal";
+import { Helmet } from "react-helmet";
 
 const ManageClasses = () => {
   const axiosSecure = useAxiosSecure();
@@ -50,6 +51,11 @@ const ManageClasses = () => {
 
   return (
     <div className="text-white">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>United Champions | Manage Classes</title>
+        <link rel="canonical" href="http://mysite.com/example" />
+      </Helmet>
       <SectionTitle title="Manage Classes" />
       <div className="overflow-x-auto bg-[#322a71] p-10 rounded-md">
         <table className="table overflow-hidden">

@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import Loader from "../../loader/Loader";
 import { useEffect } from "react";
 import { toast } from "react-hot-toast";
+import { Helmet } from "react-helmet";
 
 const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
@@ -63,6 +64,11 @@ const ManageUsers = () => {
 
   return (
     <div className="text-white">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>United Champions | Manage Users</title>
+        <link rel="canonical" href="http://mysite.com/example" />
+      </Helmet>
       <SectionTitle title="Manage Users" />
       <div className="overflow-x-auto bg-[#322a71] p-10 rounded-md">
         <table className="table">

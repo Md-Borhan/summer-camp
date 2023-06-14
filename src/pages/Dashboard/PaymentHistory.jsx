@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import SectionTitle from "../../components/SectionTitle";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useAuth } from "../../hooks/useAuth";
+import { Helmet } from "react-helmet";
 
 const PaymentHistory = () => {
   const { user } = useAuth();
@@ -17,6 +18,11 @@ const PaymentHistory = () => {
   console.log(payment);
   return (
     <div className="text-white">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>United Champions | Payment History</title>
+        <link rel="canonical" href="http://mysite.com/example" />
+      </Helmet>
       <SectionTitle title="My Enrolled Class" />
       <div className="overflow-x-auto bg-[#322a71] p-10 rounded-md">
         <table className="table">

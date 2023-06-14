@@ -4,6 +4,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import UpdateClass from "./UpdateClass";
 import { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
+import { Helmet } from "react-helmet";
 
 const MyClass = () => {
   const { user } = useAuth();
@@ -26,6 +27,11 @@ const MyClass = () => {
 
   return (
     <div className="text-white">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>United Champions | My Class</title>
+        <link rel="canonical" href="http://mysite.com/example" />
+      </Helmet>
       <SectionTitle title="My Classes" />
       <div className="overflow-x-auto bg-[#322a71]  p-10 rounded-md">
         <table className="table overflow-hidden">

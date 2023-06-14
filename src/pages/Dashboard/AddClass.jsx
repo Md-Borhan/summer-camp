@@ -2,6 +2,7 @@ import SectionTitle from "../../components/SectionTitle";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 const AddClass = () => {
   const {
@@ -64,6 +65,11 @@ const AddClass = () => {
   console.log(errors);
   return (
     <div className="">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>United Champions | Add Class</title>
+        <link rel="canonical" href="http://mysite.com/example" />
+      </Helmet>
       <SectionTitle title="Add a Class" />
       <div className="bg-[#322a71] p-10 rounded-md">
         <form className="space-y-2" onSubmit={handleSubmit(onSubmit)}>

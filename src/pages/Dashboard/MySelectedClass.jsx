@@ -3,6 +3,7 @@ import SectionTitle from "../../components/SectionTitle";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
+import { Helmet } from "react-helmet";
 
 const MySelectedClass = () => {
   const { user } = useAuth();
@@ -29,6 +30,11 @@ const MySelectedClass = () => {
   );
   return (
     <div className="text-white">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>United Champions | My Selected Class</title>
+        <link rel="canonical" href="http://mysite.com/example" />
+      </Helmet>
       <SectionTitle title="My Selected Class" />
       <div className="overflow-x-auto bg-[#322a71] p-10 rounded-md">
         <table className="table">

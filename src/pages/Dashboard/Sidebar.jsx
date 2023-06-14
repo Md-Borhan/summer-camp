@@ -39,7 +39,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className="bg-gray-100 text-white overflow-hidden flex justify-between md:hidden">
+      <div className="bg-[#1F2340] text-white overflow-hidden flex justify-between md:hidden">
         {auth?.loading && <Loader />}
         <div>
           <div className="block cursor-pointer p-4 font-bold"></div>
@@ -47,7 +47,7 @@ const Sidebar = () => {
 
         <button
           onClick={handleToggle}
-          className="mobile-menu-button p-4 focus:outline-none focus:bg-gray-200"
+          className="mobile-menu-button z-50 absolute top-0 right-0 p-4 focus:outline-none focus:bg-[#571ce0c5]"
         >
           {isActive ? (
             <AiOutlineBars className="h-5 w-5" />
