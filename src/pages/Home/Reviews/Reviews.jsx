@@ -30,11 +30,11 @@ const Reviews = () => {
     return res.data;
   });
   return (
-    <div>
-      <div className="w-full pt-6 md:w-9/12 mx-auto ">
+    <div className="py-4 md:pt-4 md:pb-20 md:mb-10">
+      <div className="">
         <SectionTitle
-          title="What The Say Student Reviews"
-          subTitle="Attending the class at this academy was an excellent decision. The facilities are state-of-the-art and equipped with the latest equipment. The instructors are highly qualified and experienced, providing valuable insights and personalized guidance."
+          title="Student Reviews"
+          subTitle="They consistently leave positive reviews, highlighting the valuable knowledge gained, supportive instructors, and interactive learning experience. They describe there courses as life-changing, empowering, and exceeding expectations!"
         ></SectionTitle>
       </div>
       <div>
@@ -43,7 +43,7 @@ const Reviews = () => {
             {reviews?.map((review) => (
               <div
                 key={review._id}
-                className="swiper-slide p-10 mb-10 md:mb-16 space-y-3 bg-[#39259077]  border border-blue-500 rounded-md"
+                className="swiper-slide p-10 space-y-3 bg-[#39259077]  border border-blue-500 rounded-md"
               >
                 <p>{review.description.slice(0, 130)}.</p>
                 <Rating
