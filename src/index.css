@@ -18,16 +18,18 @@
 }
 
 /* Humburger menu */
-.menuIcon {
-  height: 24px !important;
-  width: 24px !important;
+.bm-item-list {
+  height: 97% !important;
+}
+.bm-overlay {
+  background: #1f2340da !important;
 }
 .bm-burger-button {
   position: fixed;
   width: 36px;
   height: 30px;
   left: 36px;
-  top: 36px;
+  top: 22px;
 }
 
 /* Manage user */

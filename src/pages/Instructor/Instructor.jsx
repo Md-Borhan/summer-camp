@@ -18,7 +18,7 @@ const Instructor = () => {
     return <Loader />;
   }
   return (
-    <div>
+    <div className="pt-20">
       <div className="overflow-x-auto bg-[#322a71] p-10 rounded-md">
         <table className="table text-white">
           {/* head */}

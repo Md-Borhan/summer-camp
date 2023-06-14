@@ -2,6 +2,7 @@ import { useState } from "react";
 import { stack as Menu } from "react-burger-menu";
 import openMenu from "../../../assets/icons/menu.png";
 import closeMenu from "../../../assets/icons/close.png";
+import { HiBars3, HiXMark } from "react-icons/hi2";
 import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "../../../hooks/useAuth";
 import { toast } from "react-hot-toast";
@@ -28,14 +29,14 @@ const Navbar = () => {
       });
   };
   return (
-    <div>
+    <div className="fixed z-10 w-full">
       <div
         className={`navbar px-4 md:px-8 flex shadow-md h-full w-full ${
           darkMode ? "dark" : ""
         } bg-[#1f234088] bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border-dotted border-2 text-white border-[#571ce09f]`}
       >
         <div className="navbar-start">
-          <Link to="/">
+          <Link to="/" className="hidden lg:block">
             <img src={logo} alt="Logo" />
           </Link>
         </div>
@@ -121,73 +122,64 @@ const Navbar = () => {
       </div>
       {/* Humburger Menu */}
       <div
-        className="lg:hidden
+        className="lg:hidden responsiveMenu
       "
       >
         <Menu
           width={280}
           disableAutoFocus
-          customBurgerIcon={<img className="menuIcon" src={openMenu} />}
-          customCrossIcon={<img className="menuIcon" src={closeMenu} />}
+          customBurgerIcon={<HiBars3 className="text-white" />}
+          customCrossIcon={<HiXMark className="text-white" />}
           onStateChange={() => setIsMenuOpen(!isMenuOpen)}
         >
-          <div className="">
+          <div className="text-white ml-4 mt-4">
             <Link to="/">
               <img src={logo} alt="Logo" />
             </Link>
-            <div className="navbar-center hidden lg:flex">
-              <ul tabIndex={0} className="flex gap-6 menu-horizontal">
+            <ul tabIndex={0} className="mt-6 flex flex-col gap-6">
+              <li>
+                <NavLink
+                  to="/"
+                  className={({ isActive }) =>
+                    isActive ? "active" : "inactive"
+                  }
+                >
+                  Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/instructor"
+                  className={({ isActive }) =>
+                    isActive ? "active" : "inactive"
+                  }
+                >
+                  Instructors
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "active" : "inactive"
+                  }
+                  to="/classes"
+                >
+                  All Classes
+                </NavLink>
+              </li>
+              {auth?.user && (
                 <li>
                   <NavLink
-                    to="/"
                     className={({ isActive }) =>
                       isActive ? "active" : "inactive"
                     }
+                    to="/dashboard"
                   >
-                    Home
+                    Dashboard
                   </NavLink>
                 </li>
-                <li>
-                  <NavLink
-                    to="/instructor"
-                    className={({ isActive }) =>
-                      isActive ? "active" : "inactive"
-                    }
-                  >
-                    Instructors
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    className={({ isActive }) =>
-                      isActive ? "active" : "inactive"
-                    }
-                    to="/classes"
-                  >
-                    All Classes
-                  </NavLink>
-                </li>
-                {auth?.user && (
-                  <li>
-                    <NavLink
-                      className={({ isActive }) =>
-                        isActive ? "active" : "inactive"
-                      }
-                      to="/dashboard"
-                    >
-                      Dashboard
-                    </NavLink>
-                  </li>
-                )}
-              </ul>
-            </div>
-            <div className="navbar-end ml-5">
-              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                <div className="w-10 rounded-full ">
-                  <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                </div>
-              </label>
-            </div>
+              )}
+            </ul>
           </div>
         </Menu>
       </div>

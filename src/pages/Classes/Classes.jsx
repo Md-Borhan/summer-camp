@@ -70,7 +70,7 @@ const Classes = () => {
   const approvedClass = classes.filter((sc) => sc.status === "approved");
 
   return (
-    <div className="text-white">
+    <div className="text-white pt-20">
       <div className="grid grid-cols-1 my-14 md:grid-cols-2 lg:grid-cols-3 gap-8 myContainer">
         {approvedClass?.map((sc) => (
           <div
