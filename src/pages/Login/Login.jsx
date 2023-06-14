@@ -11,7 +11,8 @@ import login from "../../assets/others/login.json";
 import { useForm } from "react-hook-form";
 
 const Login = () => {
-  const { signIn, signInWithGoogle } = useContext(AuthContext);
+  const { signIn, signInWithGoogle, signInWithGithub } =
+    useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
   const emailRef = useRef(null);
@@ -69,30 +70,33 @@ const Login = () => {
   };
 
   // Handle github login
-  /*  const handleGithubLogin = () => {
-    sigInWithGithub()
+  const handleGithubLogin = () => {
+    signInWithGithub()
       .then((result) => {
         const loggedUser = result.user;
-         const users = {
-        name: loggedUser?.displayName,
-        email: loggedUser?.email,
-        role: "student",
-      };
-      fetch(`http://localhost:5500/users/${loggedUser?.email}`, {
-        method: "PUT",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(users),
-      });
+        const users = {
+          name: loggedUser?.displayName,
+          email: loggedUser?.email,
+          role: "student",
+        };
+        fetch(
+          `http://https://server-md-borhan.vercel.app:5500/users/${loggedUser?.email}`,
+          {
+            method: "PUT",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(users),
+          }
+        );
         console.log(loggedUser);
         toast.success("Login Success");
         navigate(from, { replace: true });
       })
       .catch((error) => {
-        setErrorText(error.message);
+        toast.error(error.message);
       });
-  }; */
+  };
 
   // Handle reset password
   /*  const handleResetPass = () => {
@@ -187,6 +191,9 @@ const Login = () => {
                 </button>
               </div>
             </form>
+            <div className="divider pt-4 before:bg-[#571ce0] after:bg-[#571ce0] text-white">
+              OR
+            </div>
             <div className="flex flex-col sm:flex-row justify-between ">
               <button
                 onClick={handleGoogleLogin}
@@ -198,6 +205,7 @@ const Login = () => {
                 </span>
               </button>
               <button
+                onClick={handleGithubLogin}
                 className={`flex w-full  sm:w-[48%] mb-4  btn btn-error bg-transparent items-center shadow-blue-200 shadow font-semibold  justify-center border border-[#571ce0] hover:bg-[#571ce0] rounded-full mt-5 gap-1 text-white md:py-3 `}
               >
                 <span>Login With Github</span>

@@ -4,10 +4,12 @@ import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { toast } from "react-hot-toast";
+import { FaGithub, FaGoogle } from "react-icons/fa";
 // import { FaGithub, FaGoogle } from "react-icons/fa";
 
 const SignUp = () => {
-  const { createUser, updateUserProfile } = useContext(AuthContext);
+  const { createUser, updateUserProfile, signInWithGithub, signInWithGoogle } =
+    useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
@@ -62,10 +64,23 @@ const SignUp = () => {
   };
 
   // Handle google login
-  /*   const handleGoogleLogin = () => {
+  const handleGoogleLogin = () => {
     signInWithGoogle()
       .then((result) => {
         const loggedUser = result.user;
+        const users = {
+          name: loggedUser?.displayName,
+          email: loggedUser?.email,
+          photo: loggedUser?.photoURL,
+          role: "student",
+        };
+        fetch(`${import.meta.env.VITE_api_url}/users/${loggedUser?.email}`, {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(users),
+        });
         console.log(loggedUser);
         toast.success("Login Success");
         navigate(from, { replace: true });
@@ -73,13 +88,28 @@ const SignUp = () => {
       .catch((error) => {
         toast.error(error.message);
       });
-  }; */
+  };
 
   // Handle github login
-  /*  const handleGithubLogin = () => {
-    sigInWithGithub()
+  const handleGithubLogin = () => {
+    signInWithGithub()
       .then((result) => {
         const loggedUser = result.user;
+        const users = {
+          name: loggedUser?.displayName,
+          email: loggedUser?.email,
+          role: "student",
+        };
+        fetch(
+          `http://https://server-md-borhan.vercel.app:5500/users/${loggedUser?.email}`,
+          {
+            method: "PUT",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(users),
+          }
+        );
         console.log(loggedUser);
         toast.success("Login Success");
         navigate(from, { replace: true });
@@ -87,7 +117,7 @@ const SignUp = () => {
       .catch((error) => {
         toast.error(error.message);
       });
-  }; */
+  };
 
   return (
     <>
@@ -279,22 +309,8 @@ const SignUp = () => {
                       />
                     </div>
                   </div>
-                  {/*  <select
-                  className="select select-bordered input shadow-blue-200 shadow"
-                  {...register("Gender", {
-                    required: true,
-                  })}
-                >
-                  <option disabled selected>
-                    Pick one
-                  </option>
-                  <option value="female">female</option>
-                  <option value="male">male</option>
-                  <option value="other">other</option>
-                </select> */}
                 </div>
               </div>
-              {/* TODO: implement one social login button */}
               <div className="w-full md:w-1/3 lg:w-2/6 mx-auto form-control border p-1 rounded-full border-[#571ce0] shadow-blue-100 shadow">
                 <input
                   className="btn rounded-full border-transparent bg-[#571ce0] hover:bg-transparent text-white hover:border-[#571ce0]"
@@ -303,6 +319,30 @@ const SignUp = () => {
                 />
               </div>
             </form>
+            {/* <hr className="border-[#571ce0] mt-8" /> */}
+            <div className="divider pt-4 before:bg-[#571ce0] after:bg-[#571ce0] text-white">
+              OR
+            </div>
+            <div className="flex flex-col sm:flex-row justify-between ">
+              <button
+                onClick={handleGoogleLogin}
+                className={`flex lg:mb-4 w-full sm:w-[48%]  btn  bg-transparent items-center shadow-blue-200 shadow hover:bg-[#571ce0] font-semibold  justify-center border border-[#571ce0] rounded-full mt-5 gap-1 text-white md:py-3 `}
+              >
+                <span>Login With Google</span>
+                <span className="text-lg">
+                  <FaGoogle></FaGoogle>
+                </span>
+              </button>
+              <button
+                onClick={handleGithubLogin}
+                className={`flex w-full  sm:w-[48%] mb-4  btn bg-transparent items-center shadow-blue-200 shadow font-semibold  justify-center border border-[#571ce0] hover:bg-[#571ce0] rounded-full mt-5 gap-1 text-white md:py-3 `}
+              >
+                <span>Login With Github</span>
+                <span className="text-xl">
+                  <FaGithub></FaGithub>
+                </span>
+              </button>
+            </div>
 
             <div className="text-center mt-4 text-white">
               <p>

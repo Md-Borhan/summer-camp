@@ -9,7 +9,6 @@ const PopularClass = () => {
     const res = await axiosSecure.get("/classes");
     return res.data;
   });
-  console.log(classes);
   if (isLoading) {
     return <Loader />;
   }
@@ -37,7 +36,7 @@ const PopularClass = () => {
               <p className="font-medium">Instructor Name: {sc.name}</p>
               <p className="font-medium">
                 Total Enrolled:
-                <span className="font-normal"> {sc.enrolled} Students</span>
+                <span className="font-normal"> {sc.enrolled}</span>
               </p>
               <p className="font-medium">
                 Price: $<span className="font-normal"> {sc.price}</span>

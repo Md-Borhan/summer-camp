@@ -107,18 +107,18 @@ const Sidebar = () => {
           <div>
             <hr className="border-[#571ce0]" />
             <Link
-              to="/dashboard/allUsers"
+              to="/dashboard/manageUsers"
               className={`flex w-full items-center px-4 py-2 mt-5 text-white hover:bg-[#1F2340] transition-colors duration-300 transform ${isLinkActive(
-                "/dashboard/allUsers"
+                "/dashboard/manageUsers"
               )}`}
             >
               <MdManageAccounts className="w-5 h-5" />
               <span className="mx-4 font-medium">Manage Users</span>
             </Link>
             <Link
-              to="/dashboard/allClasses"
+              to="/dashboard/manageClasses"
               className={`flex w-full items-center px-4 py-2 mt-5 text-white hover:bg-[#1F2340] transition-colors duration-300 transform ${isLinkActive(
-                "/dashboard/allClasses"
+                "/dashboard/manageClasses"
               )}`}
             >
               <MdOutlineManageHistory className="w-5 h-5" />

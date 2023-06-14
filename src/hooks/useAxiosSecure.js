@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosSecure = axios.create({
-  baseURL: `http://localhost:5500`,
+  baseURL: `https://server-md-borhan.vercel.app`,
 });
 
 // axios.get()

@@ -5,8 +5,8 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
 import Dashboard from "../layouts/Dashboard";
-import AllUsers from "../pages/Dashboard/ManageUsers";
-import AllClasses from "../pages/Dashboard/ManageClasses";
+import ManageUsers from "../pages/Dashboard/ManageUsers";
+import ManageClasses from "../pages/Dashboard/ManageClasses";
 import AddClass from "../pages/Dashboard/AddClass";
 import MyClass from "../pages/Dashboard/MyClass";
 import MyEnrolledClass from "../pages/Dashboard/MyEnrolledClass";
@@ -17,6 +17,9 @@ import Instructor from "../pages/Instructor/Instructor";
 import Payment from "../pages/Dashboard/Payment/Payment";
 import PaymentHistory from "../pages/Dashboard/PaymentHistory";
 import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
+import InstructorRoute from "./InstructorRoute";
+import StudentRoute from "./StudentRoute";
 
 export const router = createBrowserRouter([
   {
@@ -49,75 +52,75 @@ export const router = createBrowserRouter([
 
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: (
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "",
         element: <Welcome />,
       },
       {
-        path: "allUsers",
+        path: "manageUsers",
         element: (
-          <PrivateRoute>
-            <AllUsers />
-          </PrivateRoute>
+          <AdminRoute>
+            <ManageUsers />
+          </AdminRoute>
         ),
       },
       {
-        path: "allClasses",
+        path: "manageClasses",
         element: (
-          <PrivateRoute>
-            <AllClasses />
-          </PrivateRoute>
+          <AdminRoute>
+            <ManageClasses />
+          </AdminRoute>
         ),
       },
       {
         path: "addClass",
         element: (
-          <PrivateRoute>
+          <InstructorRoute>
             <AddClass />
-          </PrivateRoute>
+          </InstructorRoute>
         ),
       },
       {
         path: "myClass",
         element: (
-          <PrivateRoute>
+          <InstructorRoute>
             <MyClass />
-          </PrivateRoute>
+          </InstructorRoute>
         ),
       },
       {
         path: "myEnrolledClass",
         element: (
-          <PrivateRoute>
+          <StudentRoute>
             <MyEnrolledClass />
-          </PrivateRoute>
+          </StudentRoute>
         ),
       },
       {
         path: "mySelectedClass",
         element: (
-          <PrivateRoute>
+          <StudentRoute>
             <MySelectedClass />
-          </PrivateRoute>
+          </StudentRoute>
         ),
       },
       {
         path: "paymentHistory",
         element: (
-          <PrivateRoute>
+          <StudentRoute>
             <PaymentHistory />
-          </PrivateRoute>
+          </StudentRoute>
         ),
       },
       {
         path: "payment/:id",
-        element: (
-          <PrivateRoute>
-            <Payment />
-          </PrivateRoute>
-        ),
+        element: <Payment />,
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_api_url}/booked/${params.id}`),
       },

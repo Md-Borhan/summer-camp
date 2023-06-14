@@ -14,6 +14,7 @@ const PaymentHistory = () => {
       return res.data;
     },
   });
+  console.log(payment);
   return (
     <div className="text-white">
       <SectionTitle title="My Enrolled Class" />

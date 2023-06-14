@@ -3,8 +3,9 @@ import SectionTitle from "../../components/SectionTitle";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
+import FeedbackModal from "./FeedbackModal";
 
-const AllClasses = () => {
+const ManageClasses = () => {
   const axiosSecure = useAxiosSecure();
   const { data: classes = [], refetch } = useQuery(["classes"], async () => {
     const res = await axiosSecure.get("/classes");
@@ -12,7 +13,7 @@ const AllClasses = () => {
   });
   const [data, setData] = useState();
   console.log(data);
-  const [feedbackData, setFeedbackData] = useState("");
+  // const [feedbackData, setFeedbackData] = useState("");
 
   const handleApproved = (sc) => {
     fetch(`${import.meta.env.VITE_api_url}/classes/approved/${sc._id}`, {
@@ -46,24 +47,7 @@ const AllClasses = () => {
         }
       });
   };
-  const handleFeedback = (sc) => {
-    console.log(feedbackData);
-    fetch(`${import.meta.env.VITE_api_url}/classes/feedback/${sc._id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ feedback: feedbackData }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.modifiedCount > 0) {
-          // refetch();
-          toast.success("Send Feedback");
-        }
-      });
-  };
+
   return (
     <div className="text-white">
       <SectionTitle title="Manage Classes" />
@@ -131,37 +115,9 @@ const AllClasses = () => {
           </tbody>
         </table>
       </div>
-      <dialog id="my_modal_3" className="modal">
-        <form method="dialog" className="modal-box">
-          <button
-            htmlFor="my-modal-3"
-            title="Press ESC key to close modal"
-            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-          >
-            ✕
-          </button>
-          <h3 className="font-bold text-lg mb-3">Send Feedback!</h3>
-          <div className="form-control">
-            <textarea
-              onChange={(e) => setFeedbackData(e.target.value)}
-              className="textarea textarea-bordered textarea-info h-32"
-              // name="feedback"
-              placeholder="Write Your Feedback"
-            ></textarea>
-          </div>
-          <div className="form-control mt-6">
-            <button
-              onClick={() => handleFeedback(data)}
-              type="submit"
-              className="btn btn-primary"
-            >
-              Send Feedback
-            </button>
-          </div>
-        </form>
-      </dialog>
+      <FeedbackModal data={data} />
     </div>
   );
 };
 
-export default AllClasses;
+export default ManageClasses;

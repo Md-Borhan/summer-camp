@@ -8,6 +8,7 @@ import { toast } from "react-hot-toast";
 
 const Classes = () => {
   const { user, loading } = useAuth();
+
   const location = useLocation();
   const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
@@ -42,7 +43,6 @@ const Classes = () => {
         className,
         imageUrl,
         email: user?.email,
-        instructorImage: user?.photoURL,
         seats,
         price,
         name,

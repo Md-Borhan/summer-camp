@@ -5,7 +5,7 @@ import Loader from "../../loader/Loader";
 import { useEffect } from "react";
 import { toast } from "react-hot-toast";
 
-const AllUsers = () => {
+const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
   const {
     data: users = [],
@@ -15,7 +15,6 @@ const AllUsers = () => {
     queryKey: ["users"],
     queryFn: async () => {
       const res = await axiosSecure.get("/users");
-      console.log(res.data);
       return res.data;
     },
   });
@@ -121,4 +120,4 @@ const AllUsers = () => {
   );
 };
 
-export default AllUsers;
+export default ManageUsers;

@@ -49,7 +49,7 @@ const Instructor = () => {
                 <td>
                   <Link>
                     {" "}
-                    <button className="btn btn-sm bg-[#1F2340] text-xs text-white ">
+                    <button className="btn btn-sm bg-[#1F2340] hover:bg-transparent text-xs text-white ">
                       Show All Classes
                     </button>
                   </Link>
@@ -58,11 +58,6 @@ const Instructor = () => {
             ))}
           </tbody>
         </table>
-        <div className="flex justify-end mt-2">
-          <strong className=" text-white">
-            Total Class: {instructor?.length}
-          </strong>
-        </div>
       </div>
     </div>
   );

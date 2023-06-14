@@ -44,7 +44,7 @@ const MyClass = () => {
               <tr key={myClass._id} className="border-b border-[#571ce0]">
                 <td>{myClass.className}</td>
                 <td>{myClass.status}</td>
-                <td>0</td>
+                <td>{myClass.enrolled > 0 ? myClass.enrolled : 0}</td>
                 <td className="py-2 px-4">{myClass.feedback}</td>
                 <td
                   className="py-2 px-4"

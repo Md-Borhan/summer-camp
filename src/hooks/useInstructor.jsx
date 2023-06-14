@@ -6,15 +6,14 @@ const useInstructor = () => {
   const { user, loader } = useAuth();
   const axiosSecure = useAxiosSecure();
   const { data: isInstructor = [], isLoading: isInstructorLoading } = useQuery({
-    queryKey: ["isAdmin", user?.email],
-    enabled: !loader,
+    queryKey: ["isInstructor"],
+    enabled: !loader && !!user?.email,
     queryFn: async () => {
-      if (user?.email) {
-        const res = axiosSecure.get(`/users/${user?.email}`);
-        return res.data;
-      }
+      const res = await axiosSecure.get(`users/role/${user?.email}`);
+      return res.data;
     },
   });
+  console.log(isInstructor);
 
   return [isInstructor, isInstructorLoading];
 };
