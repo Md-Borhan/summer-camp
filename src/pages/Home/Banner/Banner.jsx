@@ -33,7 +33,7 @@ const Banner = () => {
         pagination={{
           clickable: true,
         }}
-        navigation={true}
+        navigation={false}
         autoplay={{
           delay: 2500,
           disableOnInteraction: true,
@@ -57,8 +57,8 @@ const Banner = () => {
                   alt=""
                 />
               </div>
-              <div className="w-full px-4 md:px-0 md:w-3/5 xl:w-3/6 mx-auto absolute flex-col text-center space-y-4 text-white items-center justify-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                <h2 className="text-3xl md:text-5xl lg:text-7xl font-bold  text-center">
+              <div className="w-full px-4 md:px-0 md:w-4/5 xl:w-3/6 mx-auto absolute flex-col text-center space-y-4 text-white items-center justify-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <h2 className="text-3xl sm:text-5xl lg:text-7xl font-bold  text-center">
                   {sd?.title}
                 </h2>
                 <p className="pb-6">{sd.desc}</p>

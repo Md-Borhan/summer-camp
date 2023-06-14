@@ -121,7 +121,7 @@ const Navbar = () => {
       </div>
       {/* Humburger Menu */}
       <div
-        className="md:hidden
+        className="lg:hidden
       "
       >
         <Menu

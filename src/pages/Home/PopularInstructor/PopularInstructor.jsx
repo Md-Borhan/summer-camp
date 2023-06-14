@@ -14,15 +14,15 @@ const PopularInstructor = () => {
     return <Loader />;
   }
   return (
-    <div className="myContainer md:pb-12">
+    <div className="myContainer md:pb-12  md:px-4 lg:px-12 2xl:px-0">
       <SectionTitle
         title="Popular Instructor Section"
         subTitle="Introducing our popular instructor, known for their expertise and engaging teaching style. With years of experience in the field, they bring a wealth of knowledge to every class. Students love their dynamic and interactive approach."
       />
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
         {classes?.slice(0, 6)?.map((sc) => (
           <div
-            className="flex flex-col md:flex-row gap-6 rounded-md items-center p-6 bg-[#571ce011] border-[#571ce0] shadow-blue-100 shadow"
+            className="flex flex-col lg:flex-row gap-6 rounded-md items-center p-6 bg-[#571ce011] border-[#571ce0] shadow-blue-100 shadow"
             key={sc._id}
           >
             <div className="bg-[#571ce036] rounded-md">

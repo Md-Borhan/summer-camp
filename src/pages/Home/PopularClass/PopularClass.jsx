@@ -18,7 +18,7 @@ const PopularClass = () => {
         title="Popular Class Section"
         subTitle="Experience our popular class that has captivated students worldwide. Led by expert instructors, this class offers a unique blend of theory and practical skills. From interactive discussions to hands-on exercises, you'll gain valuable knowledge and practical insights. "
       />
-      <div className="grid grid-cols-1 my-14 md:grid-cols-2 lg:grid-cols-3 gap-8 myContainer">
+      <div className="grid grid-cols-1 my-14 sm:grid-cols-2 xl:grid-cols-3 gap-8 myContainer">
         {classes?.slice(0, 6)?.map((sc) => (
           <div
             key={sc._id}

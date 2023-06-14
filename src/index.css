@@ -4,7 +4,7 @@
 
 /* Reuseable */
 .myContainer {
-  @apply w-full px-4 md:px-0 max-w-7xl mx-auto;
+  @apply w-full px-4 lg:px-6 2xl:px-0 max-w-7xl mx-auto;
 }
 .myBg {
   @apply bg-cover bg-no-repeat bg-center;
@@ -28,20 +28,6 @@
   height: 30px;
   left: 36px;
   top: 36px;
-}
-
-/* Banner */
-.swiper-button-next:after,
-.swiper-button-prev:after {
-  font-size: 24px !important;
-  color: white;
-}
-.swiper-button-next,
-.swiper-button-prev {
-  background: #571ce0 !important;
-  border-radius: 50% !important;
-  height: 50px !important;
-  width: 50px !important;
 }
 
 /* Manage user */
