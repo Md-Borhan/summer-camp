@@ -8,17 +8,21 @@ import { useAuth } from "../../hooks/useAuth";
 const MyClass = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const { data: classes = [] } = useQuery(["classes"], async () => {
-    const res = await axiosSecure.get("/classes");
-    return res.data;
+
+  const { data: myClasses = [] } = useQuery({
+    queryKey: ["myClasses", user?.email],
+    enabled: !!user?.email,
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/classes/${user?.email}`);
+      return res.data;
+    },
   });
-  console.log(classes);
+
   const [modalData, setModalData] = useState({});
 
   const handleUpdateModal = (sc) => {
     setModalData(sc);
   };
-  // const instructorClass = classes.filter((sc) => sc.email === user?.email);
 
   return (
     <div className="text-white">
@@ -36,18 +40,18 @@ const MyClass = () => {
             </tr>
           </thead>
           <tbody className="">
-            {classes?.map((sc) => (
-              <tr key={sc._id} className="border-b border-[#571ce0]">
-                <td>{sc.className}</td>
-                <td>{sc.status}</td>
+            {myClasses?.map((myClass) => (
+              <tr key={myClass._id} className="border-b border-[#571ce0]">
+                <td>{myClass.className}</td>
+                <td>{myClass.status}</td>
                 <td>0</td>
-                <td className="py-2 px-4">{sc.feedback}</td>
+                <td className="py-2 px-4">{myClass.feedback}</td>
                 <td
                   className="py-2 px-4"
-                  onClick={() => window.my_modal_4.showModal(sc)}
+                  onClick={() => window.my_modal_4.showModal(myClass)}
                 >
                   <button
-                    onClick={() => handleUpdateModal(sc)}
+                    onClick={() => handleUpdateModal(myClass)}
                     className="btn btn-sm bg-[#1F2340] text-xs text-white hover:bg-[#1F2340]"
                   >
                     Update

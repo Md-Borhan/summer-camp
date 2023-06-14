@@ -42,6 +42,7 @@ const Classes = () => {
         className,
         imageUrl,
         email: user?.email,
+        instructorImage: user?.photoURL,
         seats,
         price,
         name,

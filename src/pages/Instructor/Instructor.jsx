@@ -14,10 +14,11 @@ const Instructor = () => {
   }, []);
 
   const instructor = users?.filter((user) => user.role === "instructor");
-  console.log(instructor);
+  if (loading) {
+    return <Loader />;
+  }
   return (
     <div>
-      {loading && <Loader />}
       <div className="overflow-x-auto bg-[#322a71] p-10 rounded-md">
         <table className="table text-white">
           {/* head */}
@@ -46,7 +47,7 @@ const Instructor = () => {
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>
-                  <Link to="/dashboard/myClass">
+                  <Link>
                     {" "}
                     <button className="btn btn-sm bg-[#1F2340] text-xs text-white ">
                       Show All Classes

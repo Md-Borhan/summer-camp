@@ -14,13 +14,6 @@ const MySelectedClass = () => {
       return res.data;
     }
   );
-  /*  const { data: bookedClasses = [], refetch } = useQuery({
-    queryKey: ["BookedClasses", user?.email],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/booked/${user?.email}`);
-      return res.data;
-    },
-  }); */
 
   const handleDelete = (classId) => {
     axiosSecure.delete(`/booked/${classId}`).then((data) => {

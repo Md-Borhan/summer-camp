@@ -221,11 +221,7 @@ const SignUp = () => {
                   <input
                     type="text"
                     name="photo"
-                    {...register("phoneNumber", {
-                      required: true,
-                      minLength: 6,
-                      maxLength: 12,
-                    })}
+                    {...register("phoneNumber")}
                     placeholder="Photo Number"
                     className="input shadow-blue-200 shadow input-bordered"
                   />
@@ -239,10 +235,7 @@ const SignUp = () => {
                   <input
                     type="text"
                     name="address"
-                    {...register("address", {
-                      minLength: 6,
-                      maxLength: 50,
-                    })}
+                    {...register("address")}
                     placeholder="Address"
                     className="input shadow-blue-200 shadow input-bordered"
                   />
@@ -269,7 +262,7 @@ const SignUp = () => {
                       </label>
                       <input
                         className="radio radio-info"
-                        {...register("gender", { required: true })}
+                        {...register("gender")}
                         type="radio"
                         value="Female"
                       />
@@ -280,7 +273,7 @@ const SignUp = () => {
                       </label>
                       <input
                         className="radio radio-info"
-                        {...register("gender", { required: true })}
+                        {...register("gender")}
                         type="radio"
                         value="Other"
                       />
