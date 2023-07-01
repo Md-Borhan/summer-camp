@@ -19,14 +19,14 @@ const Instructor = () => {
     return <Loader />;
   }
   return (
-    <div className="pt-20">
+    <div className="">
       <Helmet>
         <meta charSet="utf-8" />
         <title>United Champions | Instructor</title>
         <link rel="canonical" href="http://mysite.com/example" />
       </Helmet>
-      <div className="overflow-x-auto bg-[#322a71] p-10 rounded-md">
-        <table className="table text-white">
+      <div className="overflow-x-auto bg-[#1f2340] pt-24 p-10 rounded-md">
+        <table className="table text-white ">
           {/* head */}
           <thead>
             <tr className="text-white border-[#571ce0]">
@@ -34,17 +34,17 @@ const Instructor = () => {
               <th>Image</th>
               <th>Name</th>
               <th>Email</th>
-              <th>All Classes</th>
+              <th className="hidden lg:block">All Classes</th>
             </tr>
           </thead>
           <tbody>
             {instructor?.map((user, index) => (
-              <tr key={user._id} className="border-b border-[#571ce0]">
+              <tr key={user._id} className="border-t border-[#571ce0]">
                 <th>{index + 1}</th>
                 <td>
                   <div className="flex items-center space-x-3">
                     <div className="avatar">
-                      <div className="rounded-md  border-[#571ce057] shadow-blue-100 shadow border w-24 h-24">
+                      <div className="rounded-md  shadow-blue-100 shadow border w-24 h-24">
                         <img src={user.photo} alt="Avatar" />
                       </div>
                     </div>
@@ -52,7 +52,7 @@ const Instructor = () => {
                 </td>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
-                <td>
+                <td className="">
                   <Link>
                     {" "}
                     <button className="btn btn-sm bg-[#1F2340] hover:bg-transparent text-xs text-white ">

@@ -6,7 +6,9 @@ import {
   FaBehanceSquare,
 } from "react-icons/fa";
 import logo from "../../../assets/icons/logo.png";
+import { useAuth } from "../../../hooks/useAuth";
 const Footer = () => {
+  const { theme } = useAuth();
   return (
     <div className="footerBg myBg text-white">
       <footer className="footer p-10 md:py-20">
@@ -62,7 +64,7 @@ const Footer = () => {
           <a className="link link-hover">Email: demo@example.com</a>
         </div>
       </footer>
-      <div className="py-6 bg-[#571ce057]  text-center">
+      <div className={`py-6 bg-[#571ce057]  text-center ${theme}`}>
         <p>
           &copy; 2023 <strong>United Champions</strong> made by Borhan
         </p>

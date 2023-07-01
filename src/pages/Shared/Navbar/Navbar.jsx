@@ -1,26 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { stack as Menu } from "react-burger-menu";
-import openMenu from "../../../assets/icons/menu.png";
-import closeMenu from "../../../assets/icons/close.png";
 import { HiBars3, HiXMark } from "react-icons/hi2";
 import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "../../../hooks/useAuth";
 import { toast } from "react-hot-toast";
 import avatar from "../../../assets/icons/user.png";
 import logo from "../../../assets/icons/logo.png";
-import { MdOutlineLightMode, MdOutlineDarkMode } from "react-icons/md";
+import { MdLightMode, MdDarkMode } from "react-icons/md";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const auth = useAuth();
-
-  const [darkMode, setDarkMode] = useState(false);
-  const handleMode = () => {
-    setDarkMode(!darkMode);
-  };
+  const { user, handleToggleTheme, logOut } = useAuth();
+  const [modeIcon, setModeIcon] = useState(false);
 
   const handleLogout = () => {
-    auth
-      ?.logOut()
+    logOut()
       .then(() => {
         toast.success("Logout Success!");
       })
@@ -28,12 +21,17 @@ const Navbar = () => {
         toast.error(error.message);
       });
   };
+
+  const handleModeIcon = () => {
+    setModeIcon(!modeIcon);
+  };
+  useEffect(() => {
+    handleToggleTheme();
+  }, []);
   return (
     <div className="fixed z-10 w-full">
       <div
-        className={`navbar px-4 md:px-8 flex shadow-md h-full w-full ${
-          darkMode ? "dark" : ""
-        } bg-[#1f234088] bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border-dotted border-2 text-white border-[#571ce09f]`}
+        className={`navbar px-4 md:px-8 flex shadow-md h-full w-full  bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border-b-2 text-white border-[#571ce04f]`}
       >
         <div className="navbar-start">
           <Link to="/" className="hidden lg:block">
@@ -42,7 +40,7 @@ const Navbar = () => {
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul tabIndex={0} className="flex gap-6 menu-horizontal">
-            <li>
+            <li className="myBtn">
               <NavLink
                 to="/"
                 className={({ isActive }) => (isActive ? "active" : "inactive")}
@@ -50,7 +48,7 @@ const Navbar = () => {
                 Home
               </NavLink>
             </li>
-            <li>
+            <li className="myBtn">
               <NavLink
                 to="/instructor"
                 className={({ isActive }) => (isActive ? "active" : "inactive")}
@@ -58,7 +56,7 @@ const Navbar = () => {
                 Instructors
               </NavLink>
             </li>
-            <li>
+            <li className="myBtn">
               <NavLink
                 className={({ isActive }) => (isActive ? "active" : "inactive")}
                 to="/classes"
@@ -66,8 +64,8 @@ const Navbar = () => {
                 All Classes
               </NavLink>
             </li>
-            {auth?.user && (
-              <li>
+            {user && (
+              <li className="myBtn">
                 <NavLink
                   className={({ isActive }) =>
                     isActive ? "active" : "inactive"
@@ -81,40 +79,42 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <div
-            onClick={() => handleMode(setDarkMode(!darkMode))}
-            className="mr-5"
-          >
-            {darkMode ? (
-              <li className="list-none">
-                <MdOutlineDarkMode size={24} />
-              </li>
-            ) : (
-              <li className="list-none">
-                <MdOutlineLightMode size={24} />
-              </li>
-            )}
+          <div className="mr-5">
+            <span
+              title="Change Mode"
+              className="text-[#FB834A] text-xl font-medium"
+              onClick={handleToggleTheme}
+            >
+              <span onClick={handleModeIcon}>
+                {modeIcon ? (
+                  <button className="myBtn">
+                    <MdLightMode size={22}></MdLightMode>Bright
+                  </button>
+                ) : (
+                  <button className="myBtn">
+                    <MdDarkMode size={22}></MdDarkMode>Night
+                  </button>
+                )}
+              </span>
+            </span>
           </div>
           <div className="mr-5">
-            {auth?.user ? (
-              <li className="list-none" onClick={handleLogout}>
+            {user ? (
+              <li className="list-none myBtn" onClick={handleLogout}>
                 <Link to="/">Logout</Link>
               </li>
             ) : (
-              <li className="list-none">
+              <li className="list-none myBtn">
                 <Link to="/login">Login</Link>
               </li>
             )}
           </div>
           <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full border-[#571ce0] shadow-blue-100 shadow">
-              {auth?.user ? (
-                <img
-                  title={auth?.user?.displayName}
-                  src={auth?.user?.photoURL}
-                />
+              {user ? (
+                <img title={user?.displayName} src={user?.photoURL} />
               ) : (
-                <img title={auth?.user?.displayName} src={avatar} />
+                <img title={user?.displayName} src={avatar} />
               )}
             </div>
           </label>
@@ -167,7 +167,7 @@ const Navbar = () => {
                   All Classes
                 </NavLink>
               </li>
-              {auth?.user && (
+              {user && (
                 <li>
                   <NavLink
                     className={({ isActive }) =>

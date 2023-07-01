@@ -6,6 +6,9 @@
 .myContainer {
   @apply w-full px-4 lg:px-6 2xl:px-0 max-w-7xl mx-auto;
 }
+.myBtn {
+  @apply btn shadow btn-md border-transparent hover:bg-[#571ce02f] hover:border-transparent text-white bg-[#571ce01f];
+}
 .myBg {
   @apply bg-cover bg-no-repeat bg-center;
 }
@@ -13,8 +16,14 @@
   @apply px-4 py-1  border-b-2 rounded-full;
 }
 .dark {
+  background-color: #1f2340;
+  color: #fff;
+  border-color: #571ce057;
+}
+.light {
   background-color: #fff;
-  color: #1f2340;
+  color: #0f172a;
+  border-color: #0f172a;
 }
 
 /* Humburger menu */
@@ -30,6 +39,23 @@
   height: 30px;
   left: 36px;
   top: 22px;
+}
+/* Swiper Slide */
+.swiper-pagination-fraction,
+.swiper-pagination-custom,
+.swiper-horizontal > .swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal {
+  top: 85% !important;
+}
+/* Back to Top Button */
+.scroll-to-top {
+  background-color: #571ce0 !important;
+}
+
+svg {
+  display: inline;
+  height: 22px;
+  width: 22px;
 }
 
 /* Manage user */

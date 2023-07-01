@@ -10,7 +10,7 @@ const Dashboard = () => {
     return <Loader />;
   }
   return (
-    <div className="relative min-h-screen md:flex">
+    <div className="relative min-h-screen md:flex bg-[#1f2340]">
       <Helmet>
         <meta charSet="utf-8" />
         <title>United Champions | Dashboard</title>

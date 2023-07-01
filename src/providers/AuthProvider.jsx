@@ -22,6 +22,7 @@ const githubProvider = new GithubAuthProvider();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [theme, setTheme] = useState("light");
 
   const createUser = (email, password) => {
     setLoading(true);
@@ -59,6 +60,14 @@ const AuthProvider = ({ children }) => {
     });
   };
 
+  const handleToggleTheme = () => {
+    if (theme === "light") {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
+  };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -82,6 +91,8 @@ const AuthProvider = ({ children }) => {
     resetPassword,
     logOut,
     updateUserProfile,
+    handleToggleTheme,
+    theme,
   };
 
   return (

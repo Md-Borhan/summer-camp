@@ -9,7 +9,7 @@ const ErrorPage = () => {
     navigate(-1);
   };
   return (
-    <div className="h-screen">
+    <div className="h-screen bg-[#1f2340]">
       <Lottie style={{ height: "80vh" }} animationData={errorImage} />
       <div onClick={backToHome} className="text-center">
         <Button value="Back to Home" />
